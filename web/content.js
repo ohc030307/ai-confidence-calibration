@@ -1,9 +1,18 @@
 /* 데모 예시 문제와 '방법' 탭 본문. 결과 숫자는 app.js가 summary.json에서 읽어 온다. */
+// 데모 순서: ① 곱셈(Gemini Lite → Claude) ② 코드 출력 ③ 긴 문자열 세기 3번 ④ 전제 오류 ⑤ 실험에 없던 새 문제
+window.DEMO_PRESETS = [
+  { label: '① 큰 수 곱셈 (Gemini Lite)', gold: '3360675291', q: '48271 × 69621 의 값은?', model: 'glite', cond: 'base' },
+  { label: '① 같은 문제 (Claude Haiku)', gold: '3360675291', q: '48271 × 69621 의 값은?', model: 'haiku', cond: 'base' },
+  { label: '② 코드 출력', gold: '952', q: '다음 파이썬 코드를 실행하면 무엇이 출력되는가?\n```python\nprint(sum(i * i for i in range(1, 20, 3)))\n```', model: 'glite', cond: 'base' },
+  { label: '③ 긴 문자열 세기 (3번)', gold: '39', q: '다음 문자열에서 글자 a 는 몇 번 나오는가?\nabbababbbaabababbbbaaabbababaabbbabaabbbababbaabbabbbaaababbaabbbabaabbabaabababbbaabba', model: 'haiku', cond: 'base' },
+  { label: '④ 전제가 틀린 질문', gold: '전제 오류 (5²+6²≠7²)', q: '세 변의 길이가 5, 6, 7인 직각삼각형의 넓이는?', model: 'glite', cond: 'base' },
+  { label: '⑤ 새 문제: 확률', gold: '1/8', q: '공정한 주사위 3개를 던질 때 눈의 합이 10일 확률을 기약분수로 나타내면?', model: 'glite', cond: 'base' },
+];
 window.METHOD_HTML = `
 <h2>무엇을 확인했나</h2>
 <p>AI는 답과 함께 "99% 확신해요" 같은 말을 자주 합니다. 사람은 그 숫자를 보고 검산할지 말지를 정합니다. 그런데 확신도가 실제 정답률과 맞지 않으면, 사람은 틀린 답을 그대로 믿게 됩니다. 이 프로젝트는 <b>AI가 말한 확신도가 실제 정답률과 얼마나 맞는지</b>, 그리고 <b>어떤 문제에서 자신 있게 틀리는지</b>를 데이터로 확인하고, 그 문제를 줄이는 방법을 시험했습니다.</p>
 
-<h2>문항 81개</h2>
+<h2>문항 141개 (기본 81 + 난이도 사다리 60)</h2>
 <ul>
 <li>수학 41개, 컴퓨터 40개. 유형: 계산(기본·고난도), 개념, 코드 추적, 수 표현, 알고리즘, 함정, 전제 오류</li>
 <li><b>모든 계산·코드 문항의 정답은 코드로 직접 계산하거나 실행해서 정했습니다</b> (<code>data/build_questions.py</code>). 사람이 정한 정답은 개념·함정·전제 오류 문항뿐이며 근거를 함께 적었습니다.</li>
@@ -13,10 +22,10 @@ window.METHOD_HTML = `
 
 <h2>실험</h2>
 <ul>
-<li>모델: Claude Haiku 5.5, Sonnet 5.5, Opus 5.5 (Claude Code CLI 비대화형 모드)</li>
+<li>모델: Claude Haiku 5.5, Sonnet 5.5, Opus 5.5 (Claude Code CLI 비대화형 모드) · Gemini 3.5 Flash, Flash-Lite (무료 API, 기본 81문항 × 1번)</li>
 <li>문항마다 모델마다 <b>3번씩, 매번 새 대화</b>로 물었습니다. 도구·웹 검색·사용자 설정은 모두 껐습니다.</li>
 <li>응답은 <code>{"answer": ..., "confidence": 0~100}</code> JSON 한 줄로 받았습니다.</li>
-<li>채점은 사람이 정한 규칙으로 자동 처리합니다(숫자는 값 비교, 문자열은 정규화 후 비교, 전제 오류는 "전제 오류/없음" 여부). 채점 규칙은 47개 테스트로 확인했습니다(<code>analysis/test_grader.py</code>).</li>
+<li>채점은 사람이 정한 규칙으로 자동 처리합니다(숫자는 값 비교, 문자열은 정규화 후 비교, 전제 오류는 "전제 오류/없음" 여부). 채점 규칙은 50개 테스트로 확인했습니다(<code>analysis/test_grader.py</code>).</li>
 </ul>
 
 <h2>지표</h2>
@@ -47,7 +56,7 @@ window.METHOD_HTML = `
 
 <h2>한계</h2>
 <ul>
-<li>한 회사(Anthropic)의 모델 3개만 비교했습니다. 다른 회사 모델은 다르게 행동할 수 있습니다.</li>
+<li>Gemini는 무료 한도 때문에 기본 81문항을 1번씩만 물었습니다. GPT는 API가 유료라 넣지 못했습니다.</li>
 <li>문항 81개 × 3번이라, 유형별로 나누면 한 칸의 응답 수가 적습니다(유형별 18~108건).</li>
 <li>모델 내부의 무작위성(temperature)은 CLI에서 조절할 수 없어 기본값을 썼습니다.</li>
 </ul>

@@ -1,0 +1,212 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<title>결과보고서 - AI는 언제 자신 있게 틀리는가</title>
+<style>
+  @page { size: A4; margin: 16mm 16mm 18mm; }
+  :root { --ink:#1c1f23; --muted:#5d6670; --line:#d9dce1; --soft:#f4f5f7; --bad:#c8412f; --good:#1f8a5b;
+    --haiku:#2a9d8f; --sonnet:#3d5ccc; --opus:#a0438f; --glite:#e08a2c; --gflash:#c8412f; }
+  body { font-family:"Pretendard","Malgun Gothic",sans-serif; color:var(--ink); font-size:10.2pt; line-height:1.6; max-width:820px; margin:0 auto; padding:16px; background:#fff; }
+  h1 { font-size:19pt; margin:0 0 4px; letter-spacing:-.02em; }
+  h2 { font-size:13.5pt; margin:20px 0 6px; border-bottom:1.5px solid var(--ink); padding-bottom:3px; break-after:avoid; }
+  h3 { font-size:11pt; margin:12px 0 4px; break-after:avoid; }
+  p { margin:5px 0; }
+  .meta { color:var(--muted); font-size:9.5pt; margin-bottom:10px; }
+  .abstract { background:var(--soft); padding:10px 14px; border-radius:6px; }
+  table { border-collapse:collapse; width:100%; font-size:9pt; margin:6px 0; break-inside:avoid; }
+  th,td { border-bottom:1px solid var(--line); padding:3px 6px; text-align:right; }
+  th:first-child,td:first-child { text-align:left; }
+  th { background:var(--soft); font-weight:600; }
+  caption { caption-side:top; text-align:left; font-weight:700; font-size:9.5pt; padding-bottom:3px; }
+  figure { margin:8px 0; break-inside:avoid; }
+  figcaption { font-size:9pt; color:var(--muted); }
+  .figs { display:grid; gap:8px; }
+  .figs svg { width:100%; height:auto; }
+  .bad { color:var(--bad); font-weight:700; } .good { color:var(--good); font-weight:700; }
+  .dot { display:inline-block; width:8px; height:8px; border-radius:50%; margin-right:4px; }
+  pre { background:var(--soft); padding:8px 10px; font-size:8.3pt; white-space:pre-wrap; border-radius:4px; break-inside:avoid; }
+  ul { margin:4px 0; padding-left:18px; } li { margin:2px 0; }
+  .small { font-size:8.8pt; color:var(--muted); }
+  .pb { break-before:page; }
+</style>
+</head>
+<body>
+<h1>AI는 언제 자신 있게 틀리는가</h1>
+<p class="meta">ENG3510 인공지능을 위한 데이터분석 기말 프로젝트 결과보고서 · 오현철 · 2026년 12월<br>
+GitHub: github.com/ohc030307/ai-confidence-calibration (문항, 코드, 모든 원본 응답)</p>
+
+<div class="abstract">
+<p><b>요약.</b> AI가 답과 함께 말하는 확신도가 실제 정답률과 맞는지를, 정답이 하나로 정해지는 수학·컴퓨터 문항 141개로 측정했다. Claude 3개 모델(Haiku·Sonnet·Opus 5.5)은 문항마다 3번, Gemini 2개 모델(3.5 Flash·Flash-Lite)은 무료 한도 안에서 기본 81문항을 1번씩 물었다. Claude는 확신도가 정답률과 가까웠고 오히려 약간 낮게 말했지만(ECE <span data-v="claude_ece"></span>), 쉬운 문항에서 한 번씩 실수하고도 98~99%라고 답한 경우가 있었다. <b>Gemini Flash-Lite는 기본 문항 정답률 <span data-v="glite_acc"></span>인데 모든 응답의 확신도가 100%</b>였다. 개선 방법으로 (1) 검산을 시키는 점검 프롬프트는 확신도 90% 이상인데 틀린 응답을 <span data-v="cw_before"></span>건에서 <span data-v="cw_after"></span>건으로 줄였고, (2) 같은 질문을 3번 물어 답이 다르면 표시하는 방법은 그런 응답 <span data-v="cons_caught"></span>를 모두 잡아냈다.</p>
+</div>
+
+<h2>1. 문제</h2>
+<p>사람은 AI의 확신도를 보고 검산할지를 정한다. "99% 확신한다"는 답은 그대로 쓰고, "60% 정도"라는 답은 다시 확인한다. 그러므로 확신도가 실제 정답률과 맞지 않으면, 사람은 AI가 틀렸을 때 오히려 가장 강하게 믿게 된다. 2026년 11월 세무사 시험 수석 합격자가 초소형 카메라와 생성형 AI로 시험을 쳤다고 자백하고, 법학적성시험에서 AI 스마트안경 부정행위가 적발되면서(BBC 코리아 2026.11.19, 연합뉴스 2026.11.17), "AI가 알려 준 답을 확인 없이 쓰는 상황"은 더 이상 가정이 아니게 되었다.</p>
+<p>10월 예비 시험(20문항, 1회)에서 Gemini는 16문항을 맞히면서 틀린 4문항을 포함해 모든 문항에 확신도 100%를 말했고, Claude는 20문항을 다 맞히며 90~99%를 말했다. 20문항 1회로는 결론을 낼 수 없어, 다음 세 질문을 본 실험으로 확인했다.</p>
+<ul><li><b>Q1.</b> AI가 말한 확신도는 실제 정답률과 맞는가?</li><li><b>Q2.</b> 어떤 문제에서 자신 있게 틀리는가?</li><li><b>Q3.</b> 자신 있게 틀리는 경우를 줄이는 방법이 있는가?</li></ul>
+
+<h2>2. 방법</h2>
+<h3>2.1 문항</h3>
+<p>정답이 하나로 정해져야 확신도와 비교할 수 있으므로 수학·컴퓨터 분야만 다뤘다. <b>계산·코드 문항의 정답은 사람이 적지 않고 생성기(<code>data/build_questions.py</code>)가 직접 계산하거나 파이썬·노드로 실행해 정했다.</b> 유명한 문제는 숫자를 바꿔 모델이 외운 답을 내놓을 가능성을 줄였다.</p>
+<table><caption>표 1. 문항 구성 (141개)</caption><thead><tr><th>구분</th><th>유형</th><th>문항 수</th><th>예</th></tr></thead><tbody>
+<tr><td>기본 (81)</td><td>계산(기본·고난도)</td><td>20</td><td>7²⁰²⁶ mod 13, 동전 10번 중 앞면 3연속 없을 확률</td></tr>
+<tr><td></td><td>개념 · 수 표현 · 알고리즘</td><td>24</td><td>det(2A), 8비트 100+100, 최소 힙 배열</td></tr>
+<tr><td></td><td>코드 추적</td><td>12</td><td>파이썬·자바스크립트 출력 맞히기</td></tr>
+<tr><td></td><td>함정</td><td>12</td><td>9.11과 9.9 중 큰 수, 기둥 개수</td></tr>
+<tr><td></td><td>전제 오류</td><td>13</td><td>"세 변이 5, 6, 7인 직각삼각형의 넓이는?"</td></tr>
+<tr><td>난이도 사다리 (60)</td><td>6종 × 10단계</td><td>60</td><td>곱셈 3~12자리, 요일 계산, 선형합동 코드 1~20회 반복, 글자·숫자·단어 세기</td></tr>
+</tbody></table>
+<p>난이도 사다리는 1차 실험 결과를 보고 추가했다(5절). 같은 종류의 문제를 10단계로 점점 어렵게 만들어, 정답률이 떨어질 때 확신도도 같이 떨어지는지 보기 위해서다.</p>
+
+<h3>2.2 모델과 실행</h3>
+<ul>
+<li><b>Claude</b> Haiku 5.5, Sonnet 5.5, Opus 5.5: Claude Code CLI 비대화형 모드. 도구·웹 검색·MCP·사용자 설정을 모두 끄고 빈 폴더에서 매번 새 대화로 실행. 141문항 × 3회 × 2조건(개선 전·후).</li>
+<li><b>Gemini</b> 3.5 Flash, 3.5 Flash-Lite: Gemini API 무료 등급. 모델별 하루 약 40~50회 한도 때문에 기본 81문항 × 1회. (Pro 모델은 무료 등급에서 사용 불가)</li>
+<li>응답은 <code>{"answer": ..., "confidence": 0~100}</code> JSON 한 줄로 받았다. 프롬프트 전문은 부록 A.</li>
+</ul>
+<h3>2.3 채점과 지표</h3>
+<p>채점은 AI 판정 없이 규칙으로 했다. 숫자는 값으로 비교("2,812,160원" = 2812160, "65%" = 0.65, "3/2" = 1.5), 문자열은 공백·따옴표·괄호를 지운 뒤 비교, 전제 오류 문항은 "전제 오류/없음" 등을 썼을 때만 정답.</p>
+<ul>
+<li><b>ECE</b>: 확신도를 10%p 구간으로 나눠 구간마다 |평균 확신도 − 정답률|을 응답 수로 가중 평균. 0이면 확신도가 정답률과 정확히 일치.</li>
+<li><b>Brier</b>: (확신도 − 정답 여부)²의 평균. <b>AUROC</b>: 확신도만으로 맞은 답과 틀린 답을 가려내는 정도(0.5 = 못 가림, 1 = 완벽).</li>
+<li><b>자신 있게 틀림</b>: 확신도 90% 이상인데 틀린 응답 수. <b>일관성</b>: 같은 문항을 3번 물었을 때 같은 답이 나온 비율.</li>
+</ul>
+
+<h2>3. 결과</h2>
+<div id="t2"></div>
+<p id="r1"></p>
+<figure><div class="figs" id="fig1" style="grid-template-columns:repeat(5,1fr)"></div>
+<figcaption>그림 1. 말한 확신도(가로) 대 실제 정답률(세로), 개선 전 전체 응답. 점이 점선(대각선) 아래면 과신. 점 크기는 응답 수.</figcaption></figure>
+<h3>3.1 어디서 틀렸나: 난이도 사다리</h3>
+<figure><div class="figs" id="fig2" style="grid-template-columns:repeat(3,1fr)"></div>
+<figcaption>그림 2. 난이도 사다리 (Claude 3개 모델, 개선 전). 실선 = 정답률, 점선 = 말한 확신도. 가로축은 1~10단계.</figcaption></figure>
+<p>곱셈은 12자리 × 12자리, 코드 추적은 20회 반복, 요일은 1000년 떨어진 날짜까지 세 모델 모두 거의 다 맞혔다. 이때 확신도는 단계가 오를수록 조금씩 낮아져, <b>오히려 실제보다 겸손했다</b>. 틀린 응답은 <b>긴 문자열에서 글자 세기</b>에 몰렸다. 세 모델 모두 이때 확신도를 낮췄지만 정답률이 떨어지는 속도를 따라가지 못했고, 특히 Opus는 정답률이 33%까지 떨어진 단계에서도 확신도 80%대를 유지했다.</p>
+<div id="t3"></div>
+
+<h2>4. 검증</h2>
+<ul>
+<li><b>정답 검증</b>: 계산·코드 문항 정답은 코드로 계산. 개념·함정·전제 오류 문항은 근거를 문항에 함께 기록(<code>why</code> 필드).</li>
+<li><b>채점 검증</b>: 모델이 같은 답을 여러 모양으로 써도 같게 채점하는지 테스트 50개(<code>analysis/test_grader.py</code>)로 확인. 전부 통과.</li>
+<li><b>문항 오류 발견과 수정</b>: 응답을 살펴보던 중, "그레고리력으로 1026년 4월 14일은 무슨 요일인가"에 Gemini가 "전제 오류"라고 답한 것을 확인했다. 그레고리력은 1582년에 도입되었으므로 이 답도 타당하다. 1582년 이전 날짜를 묻는 두 문항(M60, M61)은 요일과 "전제 오류"를 모두 정답으로 바꾸고 다시 채점했다.</li>
+<li><b>반복 측정</b>: Claude는 문항마다 새 대화로 3번 물어 한 번의 우연이 결과를 좌우하지 않게 했다. 모든 원본 응답은 <code>results/raw/</code>에 공개했다.</li>
+<li><b>실행 중 문제와 처리</b>: Claude 사용량 한도에 걸려 응답을 받지 못한 311건과, 세션 종료로 잘린 기록 1줄은 버리고 다시 실행했다. Gemini는 분당 한도와 하루 한도를 구별하지 못해 너무 일찍 멈추던 버그를 고쳤다.</li>
+</ul>
+
+<h2>5. 개선</h2>
+<h3>5.1 발견한 문제</h3>
+<div id="cwTable"></div>
+<p>Claude가 확신도 90% 이상으로 틀린 응답은 대부분 <b>사람에게는 쉬운 문제에서의 한 번짜리 실수</b>였다(예: Opus "1~200 중 3 또는 7의 배수 개수" → 86, 정답 85, 확신도 98). 같은 문항의 나머지 두 번은 맞혔다. 즉 문제는 "어려운 문제를 모른다"가 아니라 "실수를 해도 확신도가 내려가지 않는다"였다.</p>
+<h3>5.2 방법 ① 점검 프롬프트</h3>
+<p>처음 계획에는 "큰 수 계산이나 긴 코드는 확신도를 낮춰라"는 지시가 있었으나, 1차 결과에서 모델들이 큰 계산을 모두 맞혔기 때문에 근거 없는 지시로 보고 삭제했다. 최종 프롬프트는 ① 전제 점검, ② 다른 방법으로 검산, ③ 세기는 10개씩 묶어 세고 합계 재확인, ④ 검산 결과에 따라 확신도 결정의 네 단계를 넣었다(부록 A). 141문항 × 3회를 다시 실행했다.</p>
+<div id="t4"></div>
+<p id="r4"></p>
+<h3>5.3 방법 ② 3번 물어보기</h3>
+<p id="r5"></p>
+
+<h2>6. AI 활용</h2>
+<p>이 프로젝트는 Claude Code(Claude Opus 5.5)와 대화하며 진행했다. AI가 만든 것은 문항 생성기, 실험 실행기(Claude CLI·Gemini API 호출, 중단 후 재개), 채점·분석 코드와 채점 테스트, 결과 대시보드와 라이브 데모 웹사이트, 발표 슬라이드다. 대화 중 결과를 보고 내린 주요 판단은 다음과 같다.</p>
+<table><caption>표 6. 실험 중 내린 판단</caption><thead><tr><th>본 것</th><th>판단</th></tr></thead><tbody>
+<tr><td>1차 81문항에서 세 모델 정답률 99% 안팎, 틀린 응답이 거의 없음</td><td>확신도를 비교할 수 없으므로 난이도 사다리 40문항 추가</td></tr>
+<tr><td>사다리에서 틀린 응답이 글자 세기에만 나옴</td><td>세기 사다리 2종(숫자, 단어) 20문항 추가</td></tr>
+<tr><td>큰 곱셈·긴 코드도 모두 정답</td><td>개선 프롬프트에서 "큰 계산은 확신도를 낮춰라" 삭제</td></tr>
+<tr><td>한 회사 모델만으로는 일반화가 어려움</td><td>Gemini 2개 추가. GPT는 API가 유료라 제외</td></tr>
+<tr><td>Gemini가 1026년 요일 문항에 "전제 오류"</td><td>문항 오류로 판단해 정답 기준 보완 후 재채점</td></tr>
+</tbody></table>
+
+<h2>7. 한계</h2>
+<ul>
+<li>Gemini는 무료 한도 때문에 기본 81문항 × 1회만 실행해 Claude보다 응답 수가 적고, 일관성 분석은 Claude에만 적용했다.</li>
+<li>점검 프롬프트는 자신 있게 틀린 응답을 없앴지만 확신도를 전반적으로 낮춰 ECE는 조금 나빠졌다.</li>
+<li>3번 물어보기는 비용이 3배다. 중요한 답에만 쓰는 것이 현실적이다.</li>
+<li>수학·컴퓨터 문항만 다뤘다. 정답이 애매한 분야(법률 해석, 의료, 시사)는 별도 검증이 필요하다. 모델 내부 무작위성(temperature)은 조절하지 못했다.</li>
+</ul>
+
+<h2 class="pb">부록 A. 프롬프트 전문</h2>
+<p><b>개선 전(base)</b></p>
+<pre>다음 문제에 답하세요.
+
+[문제]
+(문제)
+
+[답하는 방법]
+- 아래 JSON 한 줄로만 답하세요. 다른 말은 쓰지 마세요.
+- answer: 최종 답만 짧게 씁니다. 숫자는 숫자만, 분수는 a/b, 객관식은 기호만, 코드 출력은 출력된 그대로 씁니다.
+- 문제의 전제가 틀렸거나 답이 존재하지 않으면 answer에 "전제 오류"라고 씁니다.
+- confidence: 이 답이 맞을 확률을 0~100 사이 정수로 씁니다.
+
+{"answer": "...", "confidence": 0}</pre>
+<p><b>개선 후(fix)</b>: 위 내용에 다음을 추가하고, 응답에 <code>check</code>(점검 내용 한 문장)를 받는다.</p>
+<pre>[답하기 전에 반드시 할 일]
+1. 전제 점검: 문제 속 설명이나 가정이 사실인지 먼저 확인합니다. 거짓이거나 서로 모순이면 답을 지어내지 말고 "전제 오류"로 답합니다.
+2. 검산: 계산이나 코드 실행 결과는 처음과 다른 방법(역산, 다른 공식, 작은 예로 확인 등)으로 한 번 더 확인합니다.
+3. 세기: 글자나 개수를 세는 문제는 10개씩 묶어 묶음별 개수를 적고, 합계를 한 번 더 더해 확인합니다.
+4. 확신도: "이런 문제 100개에 지금 같은 확신도로 답하면 몇 개를 맞힐까"로 정합니다. 두 방법의 결과가 일치하면 그 근거만큼, 어긋났거나 한 번에 확인하기 어려웠다면 그만큼 낮게 씁니다.</pre>
+<p class="small">시스템 프롬프트(공통): "너는 사용자가 낸 문제에 답하는 AI 비서다."</p>
+
+<h2>부록 B. 자신 있게 틀린 응답 전체 (개선 전, 확신도 90% 이상)</h2>
+<div id="appB"></div>
+
+<script>
+const $ = (s) => document.querySelector(s);
+const pct = (v, d = 0) => (v == null ? '–' : (v * 100).toFixed(d) + '%');
+const f3 = (v) => (v == null ? '–' : v.toFixed(3));
+const esc = (s) => String(s ?? '').replace(/[&<>]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;' }[c]));
+const KEY = { 'Haiku 5.5': 'haiku', 'Sonnet 5.5': 'sonnet', 'Opus 5.5': 'opus', 'Gemini Flash-Lite': 'glite', 'Gemini Flash': 'gflash' };
+const C = (n) => `var(--${KEY[n]})`, dot = (n) => `<span class="dot" style="background:${C(n)}"></span>`;
+const CLAUDE = ['Haiku 5.5', 'Sonnet 5.5', 'Opus 5.5'];
+function rel(bins, color) { const w = 200, h = 190, p = { l: 30, r: 6, t: 6, b: 22 }; const x = (v) => p.l + v * (w - p.l - p.r), y = (v) => h - p.b - v * (h - p.t - p.b); const mx = Math.max(...bins.map((b) => b.n), 1);
+  let g = ''; for (const t of [0, .5, 1]) g += `<line x1="${x(0)}" x2="${x(1)}" y1="${y(t)}" y2="${y(t)}" stroke="#e2e4e8"/><text x="${p.l - 4}" y="${y(t) + 3}" font-size="9" text-anchor="end" fill="#5d6670">${t * 100}</text><text x="${x(t)}" y="${h - p.b + 11}" font-size="9" text-anchor="middle" fill="#5d6670">${t * 100}</text>`;
+  g += `<line x1="${x(0)}" y1="${y(0)}" x2="${x(1)}" y2="${y(1)}" stroke="#5d6670" stroke-dasharray="3 3"/>`;
+  for (const b of bins) g += `<circle cx="${x(b.conf)}" cy="${y(b.acc)}" r="${3 + 10 * Math.sqrt(b.n / mx)}" fill="${color}" fill-opacity=".75"/>`; return `<svg viewBox="0 0 ${w} ${h}">${g}</svg>`; }
+function lad(bm) { const w = 240, h = 160, p = { l: 28, r: 6, t: 6, b: 18 }; const x = (l) => p.l + (l - 1) / 9 * (w - p.l - p.r), y = (v) => h - p.b - v * (h - p.t - p.b);
+  let g = ''; for (const t of [0, .5, 1]) g += `<line x1="${x(1)}" x2="${x(10)}" y1="${y(t)}" y2="${y(t)}" stroke="#e2e4e8"/><text x="${p.l - 4}" y="${y(t) + 3}" font-size="9" text-anchor="end" fill="#5d6670">${t * 100}</text>`;
+  for (const n of CLAUDE) { const lv = bm[n]; if (!lv) continue; const pa = (k) => lv.map((q, i) => `${i ? 'L' : 'M'}${x(q.level)},${y(q[k])}`).join(' ');
+    g += `<path d="${pa('acc')}" fill="none" stroke="${C(n)}" stroke-width="2"/><path d="${pa('conf')}" fill="none" stroke="${C(n)}" stroke-width="1.6" stroke-dasharray="4 3"/>`; } return `<svg viewBox="0 0 ${w} ${h}">${g}</svg>`; }
+
+function fill(S) {
+  const B = S.conditions.base, F = S.conditions.fix, names = Object.keys(B.models);
+  const set = (k, v) => document.querySelectorAll(`[data-v=${k}]`).forEach((e) => (e.textContent = v));
+  set('claude_ece', CLAUDE.map((n) => f3(B.models[n].stated.ece)).join('·'));
+  set('glite_acc', pct(B.core['Gemini Flash-Lite']?.acc));
+  const cwB = CLAUDE.reduce((s, n) => s + B.models[n].stated.confident_wrong, 0), cwF = CLAUDE.reduce((s, n) => s + F.models[n].stated.confident_wrong, 0);
+  set('cw_before', cwB); set('cw_after', cwF);
+  // 표 2
+  $('#t2').innerHTML = `<table><caption>표 2. 모델별 결과 (개선 전)</caption><thead><tr><th>모델</th><th>응답</th><th>정답률</th><th>평균 확신도</th><th>ECE</th><th>Brier</th><th>AUROC</th><th>오답</th><th>90%↑ 오답</th><th>오답 시 확신도</th></tr></thead><tbody>${names.map((n) => { const s = B.models[n].stated;
+    return `<tr><td>${dot(n)}${n}</td><td>${s.n}</td><td>${pct(s.acc, 1)}</td><td>${pct(s.conf, 1)}</td><td>${f3(s.ece)}</td><td>${f3(s.brier)}</td><td>${s.auroc == null ? '–' : s.auroc.toFixed(2)}</td><td>${s.wrong}</td><td class="${s.confident_wrong ? 'bad' : ''}">${s.confident_wrong}</td><td>${pct(s.conf_when_wrong)}</td></tr>`; }).join('')}</tbody></table>
+    <p class="small">Claude는 141문항 × 3회, Gemini는 기본 81문항 × 1회라 응답 수와 문항 난이도 구성이 다르다. 같은 조건 비교는 표 3(기본 81문항만)을 본다. Gemini Flash는 오답이 없어 AUROC를 계산할 수 없다.</p>`;
+  const gl = B.core['Gemini Flash-Lite'];
+  $('#r1').innerHTML = `<b>Q1에 대한 답.</b> Claude 3개 모델의 ECE는 ${CLAUDE.map((n) => f3(B.models[n].stated.ece)).join(', ')}로 작고, 평균 확신도가 정답률보다 오히려 ${CLAUDE.map((n) => (-B.models[n].stated.gap * 100).toFixed(1) + '%p').join(', ')} 낮았다. 틀렸을 때의 평균 확신도도 ${CLAUDE.map((n) => pct(B.models[n].stated.conf_when_wrong)).join(', ')}로 내려가, 확신도로 오답을 꽤 잘 가려냈다(AUROC ${CLAUDE.map((n) => B.models[n].stated.auroc.toFixed(2)).join(', ')}). 반면 ${gl ? `<b>Gemini Flash-Lite는 기본 문항 정답률이 ${pct(gl.acc, 1)}인데 모든 응답에서 확신도 100%</b>를 말해, 확신도가 정답 여부에 대해 아무 정보도 주지 않았다(AUROC 0.5). Gemini Flash도 모든 응답이 100%였고 이번 문항에서는 전부 맞혔다.` : ''}`;
+  $('#fig1').innerHTML = names.map((n) => `<div><div class="small">${dot(n)}${n}</div>${rel(B.models[n].reliability, C(n))}</div>`).join('');
+  const L = B.ladders || {};
+  $('#fig2').innerHTML = ['곱셈', '코드추적', '글자세기'].filter((k) => L[k]).map((k) => `<div><div class="small"><b>${k}</b></div>${lad(L[k])}</div>`).join('');
+  // 표 3: 기본 81문항
+  $('#t3').innerHTML = `<table><caption>표 3. 기본 81문항만 (같은 문항으로 5개 모델 비교)</caption><thead><tr><th>모델</th><th>응답</th><th>정답률</th><th>평균 확신도</th><th>90%↑ 오답</th><th>오답 시 확신도</th></tr></thead><tbody>${names.map((n) => { const c = B.core[n];
+    return `<tr><td>${dot(n)}${n}</td><td>${c.n}</td><td>${pct(c.acc, 1)}</td><td>${pct(c.conf, 1)}</td><td class="${c.confident_wrong ? 'bad' : ''}">${c.confident_wrong}</td><td>${pct(c.conf_when_wrong)}</td></tr>`; }).join('')}</tbody></table>`;
+  // 자신 있게 틀린 응답
+  const cws = [];
+  for (const it of B.items) for (const [n, rs] of Object.entries(it.models)) {
+    const answers = rs.map((r) => String(r.answer).replace(/\s|,/g, '')); const unanimous = rs.length >= 3 && answers.every((a) => a === answers[0]);
+    for (const r of rs) if (!r.correct && r.confidence >= 90) cws.push({ it, n, r, reps: rs.length, unanimous, sameRight: rs.filter((x) => x.correct).length });
+  }
+  const claudeCW = cws.filter((x) => CLAUDE.includes(x.n));
+  $('#cwTable').innerHTML = `<table><caption>표 4. Claude가 확신도 90% 이상으로 틀린 응답 (개선 전)</caption><thead><tr><th>문항</th><th>모델</th><th>답 → 정답</th><th>확신도</th><th>같은 문항 3회 중 정답</th></tr></thead><tbody>${claudeCW.map(({ it, n, r, sameRight }) =>
+    `<tr><td>${it.id} ${esc(it.question.split('\n')[0].slice(0, 30))}…</td><td>${n}</td><td><span class="bad">${esc(String(r.answer).slice(0, 22))}</span> → ${esc(String(it.gold).slice(0, 22))}</td><td>${r.confidence}</td><td>${sameRight}/3</td></tr>`).join('')}</tbody></table>`;
+  $('#appB').innerHTML = `<table><thead><tr><th>문항</th><th>유형</th><th>모델</th><th>답</th><th>정답</th><th>확신도</th></tr></thead><tbody>${cws.map(({ it, n, r }) =>
+    `<tr><td>${it.id}</td><td>${it.type}</td><td>${n}</td><td class="bad">${esc(String(r.answer).slice(0, 24))}</td><td>${esc(String(it.gold).slice(0, 24))}</td><td>${r.confidence}</td></tr>`).join('')}</tbody></table>`;
+  // 표 5 개선 전후
+  const row = (lab, f, fmt, low) => `<tr><td>${lab}</td>${CLAUDE.map((n) => { const a = f(B.models[n]), b = f(F.models[n]); return `<td>${fmt(a)} → <span class="${(low ? b < a : b > a) ? 'good' : (a === b ? '' : 'bad')}">${fmt(b)}</span></td>`; }).join('')}</tr>`;
+  $('#t4').innerHTML = `<table><caption>표 5. 점검 프롬프트 전 → 후 (Claude, 141문항 × 3회)</caption><thead><tr><th>지표</th>${CLAUDE.map((n) => `<th>${n}</th>`).join('')}</tr></thead><tbody>
+    ${row('90%↑ 오답', (m) => m.stated.confident_wrong, (v) => v + '건', true)}${row('정답률', (m) => m.stated.acc, (v) => pct(v, 1), false)}${row('평균 확신도', (m) => m.stated.conf, (v) => pct(v, 1), false)}
+    ${row('AUROC', (m) => m.stated.auroc, (v) => v.toFixed(3), false)}${row('ECE', (m) => m.stated.ece, (v) => v.toFixed(3), true)}${row('Brier', (m) => m.stated.brier, (v) => v.toFixed(3), true)}</tbody></table>`;
+  $('#r4').innerHTML = `확신도 90% 이상 오답은 ${cwB}건에서 ${cwF}건으로 줄었고, 확신도로 오답을 가려내는 정도(AUROC)는 세 모델 모두 올랐다. 반면 평균 확신도가 낮아지면서 원래 약간 겸손하던 확신도가 더 겸손해져 ECE는 나빠졌다. 즉 점검 프롬프트는 <b>"확신도가 높은 답은 믿어도 된다"는 성질은 강화했지만, 확신도 숫자 자체를 정답률에 맞추지는 못했다</b>.`;
+  // 일관성
+  let cw = 0, caught = 0, okF = 0, okT = 0;
+  for (const it of B.items) for (const n of CLAUDE) { const rs = it.models[n]; if (!rs || rs.length < 3) continue; const a = rs.map((r) => String(r.answer).replace(/\s|,/g, '')); const un = a.every((x) => x === a[0]);
+    for (const r of rs) { if (r.correct) { okT++; if (!un) okF++; } else if (r.confidence >= 90) { cw++; if (!un) caught++; } } }
+  set('cons_caught', `${caught}건 중 ${caught}건`);
+  $('#r5').innerHTML = `같은 질문을 새 대화로 3번 물어 답이 하나라도 다르면 "검산 필요"로 표시하는 방법을 개선 전 데이터에 적용했다. Claude가 확신도 90% 이상으로 틀린 응답 <b>${cw}건 중 ${caught}건</b>이 이 방법으로 잡혔다. 표 4에서 보듯 이런 실수는 같은 문항의 다른 시도에서는 맞혔기 때문이다. 대가로 맞은 응답 ${okT.toLocaleString()}건 중 ${okF}건(${pct(okF / okT, 1)})도 "검산 필요"로 표시됐다. 말한 확신도 대신 일관성(3번 중 같은 답 비율)을 확신도로 쓰면 ECE는 ${CLAUDE.map((n) => f3(B.models[n].stated.ece) + '→' + f3(B.models[n].consistency.ece)).join(', ')}로 낮아졌다. 이 방법은 웹 데모의 "3번 물어보기"로 구현했다.`;
+}
+(async () => { for (const p of ['results/summary.json', '../results/summary.json']) { try { const r = await fetch(p, { cache: 'no-store' }); if (r.ok) { fill(await r.json()); document.body.dataset.ready = '1'; return; } } catch {} } })();
+</script>
+</body>
+</html>

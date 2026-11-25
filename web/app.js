@@ -176,7 +176,7 @@ function setupDemo() {
   $('#presets').addEventListener('click', (e) => {
     const b = e.target.closest('button'); if (!b) return;
     const p = PRESETS[b.dataset.i];
-    $('#q').value = p.q; if (p.model) $('#model').value = p.model; if (p.cond) $('#cond').value = p.cond;
+    $('#q').value = p.q; $('#q').dataset.gold = p.gold || ''; $('#q').dataset.goldFor = p.q; if (p.model) $('#model').value = p.model; if (p.cond) $('#cond').value = p.cond;
   });
   $('#livehint').innerHTML = LIVE
     ? '실제 모델에 연결되어 있습니다. 한 번 묻는 데 5~20초 걸립니다.'
@@ -195,6 +195,8 @@ function setupDemo() {
       const j = await r.json();
       if (j.error) throw new Error(j.error);
       renderAnswer(j.results, modelName, cond);
+      const qa = $('#q');
+      if (qa.dataset.gold && qa.dataset.goldFor === question) $('#answer').insertAdjacentHTML('beforeend', `<p style="font-size:18px">실제 정답: <b>${esc(qa.dataset.gold)}</b></p>`);
     } catch (err) {
       out.innerHTML = `<p class="cell-bad">오류: ${esc(err.message)}</p>`;
     } finally { $('#go').disabled = false; }
