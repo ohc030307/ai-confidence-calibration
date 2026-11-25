@@ -16,6 +16,7 @@ function showTab(id) {
   history.replaceState(null, '', '#' + id);
 }
 document.querySelectorAll('.tabs button').forEach((b) => b.addEventListener('click', () => showTab(b.dataset.tab)));
+document.addEventListener('click', (e) => { const g = e.target.closest('[data-goto]'); if (g) { showTab(g.dataset.goto); scrollTo(0, 0); } });
 
 // ───── 데이터 불러오기
 async function loadSummary() {
@@ -120,7 +121,7 @@ function renderFix() {
   const el = $('#fixBody');
   const story = window.FIX_STORY || '';
   if (!fix) { el.innerHTML = story + '<p class="muted">개선 후 실험 결과가 아직 없습니다.</p>'; return; }
-  const names = Object.keys(base.models);
+  const names = Object.keys(base.models).filter((n) => fix.models[n]); // 개선 후 결과가 있는 모델만
   const line = (label, f, better) => `<tr><td>${label}</td>${names.map((n) => {
     const a = f(base.models[n]), b = f(fix.models[n]);
     const good = a != null && b != null && (better === 'low' ? b < a : b > a);
@@ -256,4 +257,5 @@ function renderMethod() { $('#methodBody').innerHTML = window.METHOD_HTML || '';
   renderResults(); renderFix(); setupItems(); setupDemo(); renderMethod();
   const h = location.hash.slice(1);
   if (h && document.getElementById(h)) showTab(h);
-})().catch((e) => { document.querySelector('main').innerHTML = `<p class="cell-bad">${esc(e.message)}</p>`; });
+  else if (LIVE) showTab('demo'); // 발표용 로컬 서버에서는 데모부터, 공개 사이트에서는 게시판부터
+})().catch((e) => { const p = document.getElementById('results'); if (p) p.insertAdjacentHTML('afterbegin', `<p class="cell-bad">결과를 불러오지 못했습니다: ${esc(e.message)}</p>`); });

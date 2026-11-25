@@ -11,9 +11,10 @@
   <div class="wrap">
     <p class="course">인공지능을 위한 데이터분석 · 기말 프로젝트</p>
     <h1>AI는 언제 자신 있게 틀리는가</h1>
-    <p class="lead">AI가 "99% 확신해요"라고 말할 때 정말 99% 맞을까? 수학·컴퓨터 문제를 Claude·Gemini 모델 5개에게 풀게 하고, 말한 확신도와 실제 정답률을 비교했습니다.</p>
+    <p class="lead">AI가 "99% 확신해요"라고 말할 때 정말 99% 맞을까? 수학·컴퓨터 문제를 Claude·Gemini 모델 5개에게 풀게 해 확인했습니다. 내 전공에는 어떤 AI가 좋은지, 대학생들의 후기도 함께 모읍니다.</p>
     <nav class="tabs" role="tablist">
-      <button role="tab" data-tab="demo" aria-selected="true">라이브 데모</button>
+      <button role="tab" data-tab="community" aria-selected="true">AI 후기 게시판</button>
+      <button role="tab" data-tab="demo">라이브 데모</button>
       <button role="tab" data-tab="results">결과</button>
       <button role="tab" data-tab="fix">개선 전후</button>
       <button role="tab" data-tab="items">문항 살펴보기</button>
@@ -23,8 +24,41 @@
 </header>
 
 <main class="wrap">
+  <!-- AI 후기 게시판 -->
+  <section id="community" class="panel" role="tabpanel">
+    <p class="muted">내 전공·분야에서 써 본 AI를 평가해 주세요. 로그인 없이 쓸 수 있고, 지울 때는 쓸 때 정한 비밀번호가 필요합니다.</p>
+    <div id="cmFields" class="chips" aria-label="분야 고르기"></div>
+    <div class="cm-grid">
+      <div>
+        <div id="cmRank" class="card"></div>
+        <div id="cmData" class="card note" hidden>
+          <b>실험 데이터로 보면</b>
+          <p>수학·컴퓨터 문제 141개로 직접 시험해 보니, <b>Gemini Flash-Lite는 틀린 답에도 늘 "100% 확신"</b>이라고 했고 Claude는 확신도가 실제 정답률과 거의 맞았습니다. 다만 어떤 AI든 가끔 98% 확신하며 틀리니, 중요한 답은 같은 질문을 새 대화로 한 번 더 물어보세요. <button type="button" class="link" data-goto="results">실험 결과 보기</button></p>
+        </div>
+        <p id="cmStatus" class="muted"></p>
+        <div id="cmList"></div>
+      </div>
+      <form id="rvForm" class="card rvform">
+        <h3>후기 쓰기</h3>
+        <label>분야 <select id="rvField" name="field"></select></label>
+        <label>AI <select id="rvAi" name="ai"></select></label>
+        <input id="rvAiEtc" name="aiEtc" maxlength="30" placeholder="AI 이름" hidden aria-label="AI 이름 직접 입력">
+        <fieldset class="rate"><legend>별점</legend>
+          <label><input type="radio" name="rating" value="5" checked>★5</label><label><input type="radio" name="rating" value="4">★4</label><label><input type="radio" name="rating" value="3">★3</label><label><input type="radio" name="rating" value="2">★2</label><label><input type="radio" name="rating" value="1">★1</label>
+        </fieldset>
+        <label>어디에 썼나요 (선택) <input name="task" maxlength="40" placeholder="예) 자료구조 과제 디버깅"></label>
+        <label>후기 <textarea name="content" rows="5" minlength="5" maxlength="1000" required placeholder="좋았던 점, 틀렸던 경험, 이런 일엔 이 AI를 쓰라는 팁"></textarea></label>
+        <div class="row2">
+          <label>닉네임 <input name="nickname" maxlength="20" required></label>
+          <label>비밀번호 <input name="password" type="password" minlength="4" required placeholder="삭제할 때 필요"></label>
+        </div>
+        <button type="submit">후기 등록</button>
+      </form>
+    </div>
+  </section>
+
   <!-- 라이브 데모 -->
-  <section id="demo" class="panel" role="tabpanel">
+  <section id="demo" class="panel" role="tabpanel" hidden>
     <div class="demo-grid">
       <form id="ask" class="card">
         <label for="q">문제</label>
@@ -105,6 +139,7 @@
 <footer class="wrap foot">
   <p>오현철 · 서강대학교 ENG3510 인공지능을 위한 데이터분석 · 2026년 2학기 · 데이터와 코드: 이 저장소의 <code>data/</code>, <code>results/</code></p>
 </footer>
+<script src="community.js"></script>
 <script src="content.js"></script>
 <script src="app.js"></script>
 </body>

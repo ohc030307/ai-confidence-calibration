@@ -93,3 +93,34 @@ code { font-size: .92em; }
 .spinner { display: inline-block; width: 16px; height: 16px; border: 2px solid var(--line); border-top-color: var(--accent); border-radius: 50%; animation: spin 1s linear infinite; vertical-align: -3px; margin-right: 8px; }
 @keyframes spin { to { transform: rotate(360deg); } }
 @media (prefers-reduced-motion: reduce) { .spinner { animation: none; } }
+
+/* AI 후기 게시판 */
+.chips { display: flex; flex-wrap: wrap; gap: 6px; margin: 12px 0 16px; }
+.chips button { font: inherit; font-size: 14px; border: 1px solid var(--line); background: var(--surface); color: var(--ink); border-radius: 999px; padding: 5px 12px; cursor: pointer; }
+.chips button[aria-pressed="true"] { background: var(--accent); border-color: var(--accent); color: #fff; }
+.cm-grid { display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 4fr); gap: 18px; align-items: start; }
+@media (max-width: 860px) { .cm-grid { grid-template-columns: 1fr; } .rvform { order: -1; } }
+.rank { list-style: none; padding: 0; margin: 8px 0 0; counter-reset: r; }
+.rank li { display: grid; grid-template-columns: 26px 110px 1fr auto; gap: 10px; align-items: center; padding: 6px 0; counter-increment: r; }
+.rank li::before { content: counter(r); font-weight: 800; color: var(--muted); }
+.rank .bar { height: 10px; background: var(--bg); border-radius: 99px; overflow: hidden; }
+.rank .bar span { display: block; height: 100%; background: var(--warn); border-radius: 99px; }
+@media (max-width: 520px) { .rank li { grid-template-columns: 22px 1fr auto; } .rank .bar { display: none; } }
+.note { margin-top: 12px; border-color: var(--accent); }
+.note p { margin: 6px 0 0; }
+.rvform { position: sticky; top: 12px; display: grid; gap: 10px; }
+.rvform h3 { margin: 0; }
+.rvform input, .cmform input { width: 100%; font: inherit; color: var(--ink); background: var(--bg); border: 1px solid var(--line); border-radius: 8px; padding: 9px 10px; margin-top: 6px; }
+.rvform fieldset { border: 0; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 4px 10px; }
+.rvform legend { font-weight: 600; font-size: 14px; margin-bottom: 4px; }
+.rvform fieldset label { font-weight: 500; color: var(--warn); display: inline-flex; gap: 4px; align-items: center; }
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.stars { color: var(--warn); letter-spacing: 1px; }
+.review .qtext { white-space: pre-wrap; }
+.cms { border-top: 1px solid var(--line); margin-top: 10px; padding-top: 8px; font-size: 14px; }
+.cm { padding: 3px 0; }
+.cmform { display: grid; grid-template-columns: 3fr 1fr 1fr auto; gap: 6px; margin-top: 6px; }
+.cmform input { margin-top: 0; padding: 6px 8px; font-size: 14px; }
+.cmform button { font: inherit; font-size: 14px; border: 0; border-radius: 8px; background: var(--accent); color: #fff; padding: 0 12px; cursor: pointer; }
+@media (max-width: 600px) { .cmform { grid-template-columns: 1fr 1fr; } }
+button.link { background: none; border: 0; padding: 0; font: inherit; color: var(--accent); cursor: pointer; text-decoration: underline; }
