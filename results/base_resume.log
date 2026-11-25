@@ -1,0 +1,15 @@
+[base] 278 calls to run (991 already done)
+  20 done, 0 failed, 36.0/min, ~7 min left
+  40 done, 0 failed, 39.4/min, ~6 min left
+  60 done, 0 failed, 41.2/min, ~5 min left
+  80 done, 0 failed, 42.1/min, ~5 min left
+  100 done, 0 failed, 43.8/min, ~4 min left
+  120 done, 0 failed, 44.9/min, ~3 min left
+  140 done, 0 failed, 45.4/min, ~3 min left
+  160 done, 0 failed, 47.4/min, ~2 min left
+  180 done, 0 failed, 46.2/min, ~2 min left
+  200 done, 0 failed, 45.8/min, ~2 min left
+  220 done, 0 failed, 44.0/min, ~1 min left
+  240 done, 0 failed, 43.9/min, ~1 min left
+  260 done, 0 failed, 44.5/min, ~0 min left
+[base] finished: 278 calls, 0 unparsed

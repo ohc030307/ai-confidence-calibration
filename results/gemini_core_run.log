@@ -1,0 +1,5 @@
+[base] 110 calls to run (79 already done)
+  제미나이 하루 한도: GenerateRequestsPerDayPerProjectPerModel-FreeTier
+  제미나이 하루 한도 도달: 여기서 멈춤 (내일 다시 실행하면 이어서 함)
+  제미나이 하루 한도 도달: 여기서 멈춤 (내일 다시 실행하면 이어서 함)
+[base] finished: 4 calls, 0 unparsed

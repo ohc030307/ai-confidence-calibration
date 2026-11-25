@@ -1,0 +1,111 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 확신도 점검</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="top">
+  <div class="wrap">
+    <p class="course">인공지능을 위한 데이터분석 · 기말 프로젝트</p>
+    <h1>AI는 언제 자신 있게 틀리는가</h1>
+    <p class="lead">AI가 "99% 확신해요"라고 말할 때 정말 99% 맞을까? 수학·컴퓨터 문제를 Claude·Gemini 모델 5개에게 풀게 하고, 말한 확신도와 실제 정답률을 비교했습니다.</p>
+    <nav class="tabs" role="tablist">
+      <button role="tab" data-tab="demo" aria-selected="true">라이브 데모</button>
+      <button role="tab" data-tab="results">결과</button>
+      <button role="tab" data-tab="fix">개선 전후</button>
+      <button role="tab" data-tab="items">문항 살펴보기</button>
+      <button role="tab" data-tab="method">방법</button>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <!-- 라이브 데모 -->
+  <section id="demo" class="panel" role="tabpanel">
+    <div class="demo-grid">
+      <form id="ask" class="card">
+        <label for="q">문제</label>
+        <textarea id="q" rows="5" placeholder="예) 48271 × 69621 의 값은?"></textarea>
+        <div class="presets" id="presets"></div>
+        <div class="row">
+          <label>모델
+            <select id="model">
+              <option value="haiku">Haiku 5.5</option>
+              <option value="sonnet">Sonnet 5.5</option>
+              <option value="opus">Opus 5.5</option>
+              <option value="glite">Gemini Flash-Lite</option>
+              <option value="gflash">Gemini Flash</option>
+            </select>
+          </label>
+          <label>프롬프트
+            <select id="cond">
+              <option value="base">기본 (개선 전)</option>
+              <option value="fix">점검 프롬프트 (개선 후)</option>
+            </select>
+          </label>
+          <label>반복
+            <select id="reps">
+              <option value="1">1번</option>
+              <option value="3" selected>3번 (일관성 확인)</option>
+            </select>
+          </label>
+        </div>
+        <button type="submit" id="go">물어보기</button>
+        <p class="hint" id="livehint"></p>
+      </form>
+      <div id="answer" class="card answer">
+        <p class="muted">문제를 넣고 <b>물어보기</b>를 누르면 모델이 실제로 답합니다. 모델이 말한 확신도 옆에, 우리 실험 결과로 본 "실제로 믿어도 되는 정도"를 같이 보여 줍니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- 결과 -->
+  <section id="results" class="panel" role="tabpanel" hidden>
+    <div id="kpis" class="kpis"></div>
+    <h2>모델별 결과</h2>
+    <p class="muted">ECE는 말한 확신도와 실제 정답률의 평균 차이입니다(0에 가까울수록 확신도를 믿을 수 있음). AUROC는 확신도로 맞은 답과 틀린 답을 얼마나 구별할 수 있는지를 뜻합니다(0.5면 구별 못함).</p>
+    <div id="modelTable"></div>
+    <h2>확신도는 실제 정답률과 맞을까</h2>
+    <p class="muted">점이 대각선 위에 있으면 말한 만큼 맞힌 것이고, 대각선 아래에 있으면 말한 것보다 덜 맞힌 것(과신)입니다. 점 크기는 응답 수입니다.</p>
+    <div id="reliab" class="smalls"></div>
+    <h2>난이도를 올리면 확신도도 따라 내려갈까</h2>
+    <p class="muted">같은 종류의 문제를 10단계로 점점 어렵게 만들었습니다. <b>실선은 실제 정답률, 점선은 말한 확신도</b>입니다. 두 선이 붙어 있으면 확신도를 믿을 수 있고, 점선이 실선보다 높이 떠 있으면 과신입니다.
+      <span class="dot" style="background:var(--haiku)"></span>Haiku <span class="dot" style="background:var(--sonnet)"></span>Sonnet <span class="dot" style="background:var(--opus)"></span>Opus <span class="dot" style="background:var(--glite)"></span>Gemini Flash-Lite <span class="dot" style="background:var(--gflash)"></span>Gemini Flash</p>
+    <div id="ladders" class="smalls"></div>
+    <h2>문제 유형별 정답률과 확신도</h2>
+    <div id="typeTable"></div>
+  </section>
+
+  <!-- 개선 -->
+  <section id="fix" class="panel" role="tabpanel" hidden>
+    <div id="fixBody"></div>
+  </section>
+
+  <!-- 문항 -->
+  <section id="items" class="panel" role="tabpanel" hidden>
+    <div class="filters">
+      <label>조건 <select id="fCond"><option value="base">개선 전</option><option value="fix">개선 후</option></select></label>
+      <label>분야 <select id="fDomain"><option value="">전체</option><option>수학</option><option>컴퓨터</option></select></label>
+      <label>유형 <select id="fType"><option value="">전체</option></select></label>
+      <label class="check"><input type="checkbox" id="fWrong"> 틀린 응답이 있는 문항만</label>
+    </div>
+    <p id="itemCount" class="muted"></p>
+    <div id="itemList"></div>
+  </section>
+
+  <!-- 방법 -->
+  <section id="method" class="panel" role="tabpanel" hidden>
+    <div id="methodBody" class="prose"></div>
+  </section>
+</main>
+
+<footer class="wrap foot">
+  <p>오현철 · 서강대학교 ENG3510 인공지능을 위한 데이터분석 · 2026년 2학기 · 데이터와 코드: 이 저장소의 <code>data/</code>, <code>results/</code></p>
+</footer>
+<script src="content.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
