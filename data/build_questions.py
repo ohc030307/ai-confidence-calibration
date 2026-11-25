@@ -249,6 +249,10 @@ for lv, span in enumerate([0, 1, 3, 10, 30, 80, 150, 300, 600, 1000], 1):
     w = d.weekday()
     ladder(M, "요일", lv, f"그레고리력으로 {d.year}년 {d.month}월 {d.day}일은 무슨 요일인가?", WD[w], kind="str",
            accept=[WD[w][0], WD_EN[w], WD_EN[w][:3]], why=f"2026년에서 약 {span}년 떨어짐")
+    if d.year < 1582:
+        # 검증 중 발견: 그레고리력은 1582년에 도입됐으므로 그 이전 날짜는 '전제 오류'라는 답도 타당하다.
+        Q[-1]["premise_ok"] = True
+        Q[-1]["why"] += " · 1582년 이전이라 '전제 오류'도 정답 처리"
 
 # (3) 글자 세기: 문자열 길이 15 ~ 240
 for lv, n in enumerate([15, 30, 50, 75, 100, 130, 160, 190, 215, 240], 1):

@@ -1,0 +1,315 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI 확신도 발표</title>
+<style>
+  :root { --bg:#ffffff; --ink:#1c1f23; --muted:#5d6670; --line:#e2e4e8; --soft:#f4f5f7; --accent:#2f5bd3; --good:#1f8a5b; --bad:#c8412f; --warn:#b7791f;
+    --haiku:#2a9d8f; --sonnet:#3d5ccc; --opus:#a0438f; --glite:#e08a2c; --gflash:#c8412f;
+    font-family:"Pretendard","Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif; }
+  * { box-sizing:border-box; }
+  html,body { margin:0; height:100%; background:#2b2f35; }
+  .deck { width:100vw; height:100vh; display:grid; place-items:center; }
+  section.slide { display:none; width:min(100vw, calc(100vh * 16 / 9)); aspect-ratio:16/9; background:var(--bg); color:var(--ink);
+    padding:4.2% 5.5%; position:relative; overflow:hidden; font-size:min(2.1vw, 3.73vh); line-height:1.5; }
+  section.slide.on { display:flex; flex-direction:column; }
+  h1 { font-size:2.5em; margin:0 0 .3em; letter-spacing:-.02em; line-height:1.2; }
+  h2 { font-size:1.65em; margin:0 0 .6em; letter-spacing:-.01em; }
+  p { margin:.3em 0; }
+  .muted { color:var(--muted); }
+  .small { font-size:.72em; }
+  .big { font-size:3.2em; font-weight:800; letter-spacing:-.03em; line-height:1.1; }
+  .num { position:absolute; right:3%; bottom:3%; font-size:.6em; color:var(--muted); }
+  .cols { display:grid; grid-template-columns:1fr 1fr; gap:4%; flex:1; align-items:center; }
+  .cols3 { display:grid; grid-template-columns:repeat(3,1fr); gap:2.5%; }
+  .box { background:var(--soft); border-radius:.5em; padding:.8em 1em; }
+  .box b.k { display:block; font-size:2em; letter-spacing:-.02em; }
+  ul { margin:.2em 0; padding-left:1.1em; } li { margin:.25em 0; }
+  table { border-collapse:collapse; width:100%; font-size:.8em; }
+  th,td { padding:.35em .6em; border-bottom:1px solid var(--line); text-align:right; }
+  th:first-child,td:first-child { text-align:left; }
+  th { color:var(--muted); font-weight:600; font-size:.85em; }
+  .bad { color:var(--bad); font-weight:700; } .good { color:var(--good); font-weight:700; }
+  .dot { display:inline-block; width:.6em; height:.6em; border-radius:50%; margin-right:.35em; }
+  .quote { font-size:1.5em; font-weight:700; border-left:.25em solid var(--accent); padding-left:.7em; margin:.6em 0; }
+  .src { font-size:.55em; color:var(--muted); position:absolute; left:5.5%; bottom:3%; }
+  .charts { display:grid; gap:2%; flex:1; min-height:0; }
+  .charts svg { width:100%; height:auto; max-height:100%; }
+  .chip { display:inline-block; background:var(--soft); border-radius:99em; padding:.1em .7em; font-size:.75em; margin-right:.3em; }
+  .tag { font-size:.7em; font-weight:700; color:var(--accent); letter-spacing:.02em; margin-bottom:.4em; }
+  .demo { background:#15171a; color:#e9ebee; }
+  .demo .muted { color:#9aa3ad; }
+  .demo .box { background:#23272d; }
+  .flow { display:grid; grid-template-columns:repeat(4,1fr); gap:2%; margin-top:.6em; }
+  .flow .box { position:relative; }
+  .flow .box b { display:block; margin-bottom:.2em; }
+  @media print { html,body { background:#fff; } .deck { display:block; width:auto; height:auto; }
+    section.slide { display:flex !important; flex-direction:column; width:100%; page-break-after:always; break-after:page; font-size:14pt; }
+    @page { size: 13.333in 7.5in; margin:0; } }
+</style>
+</head>
+<body>
+<div class="deck" id="deck">
+
+<!-- 1 표지 -->
+<section class="slide">
+  <div style="margin:auto 0">
+    <p class="tag">인공지능을 위한 데이터분석 · 기말 프로젝트</p>
+    <h1>AI는 언제<br>자신 있게 틀리는가</h1>
+    <p class="muted">AI가 말한 확신도와 실제 정답률 비교 · 모델 5개 · 문항 141개</p>
+    <p style="margin-top:1.5em">오현철</p>
+  </div>
+</section>
+
+<!-- 2 도입: AI 안경 -->
+<section class="slide">
+  <p class="tag">이번 달 뉴스</p>
+  <h2>시험장에 들어온 AI</h2>
+  <ul>
+    <li>세무사 시험 수석 합격자가 <b>초소형 카메라 + 생성형 AI</b>로 시험을 쳤다고 자백</li>
+    <li>올해 법학적성시험(LEET)에서 <b>AI 스마트안경</b> 부정행위 적발 → 0점, 4년 응시 제한</li>
+    <li>수능을 앞두고 정부가 <b>안경·단추까지 검사</b>하는 대책 발표</li>
+  </ul>
+  <p class="quote">그런데, 안경 속 AI가 "99% 확신, 정답은 3번"이라고 하면<br>그대로 적어도 될까?</p>
+  <p class="src">출처: BBC 코리아(2026.11.19), 연합뉴스(2026.11.17)</p>
+</section>
+
+<!-- 3 문제 -->
+<section class="slide">
+  <p class="tag">문제</p>
+  <h2>사람은 AI의 확신도를 보고 검산할지 정한다</h2>
+  <div class="cols">
+    <div>
+      <p>"99% 확신해요" → 그냥 믿는다<br>"60% 정도요" → 한 번 더 확인한다</p>
+      <p style="margin-top:.8em">그러니 <b>확신도가 실제 정답률과 맞지 않으면</b>,<br>사람은 틀린 답을 가장 확신할 때 믿게 된다.</p>
+      <p style="margin-top:.8em"><b>질문 1.</b> AI의 확신도는 실제 정답률과 맞는가?<br><b>질문 2.</b> 어떤 문제에서 자신 있게 틀리는가?<br><b>질문 3.</b> 그걸 줄이는 방법이 있는가?</p>
+    </div>
+    <div class="box">
+      <p class="small muted">10월 예비 시험 (20문항, 1번씩)</p>
+      <p><b>Gemini</b>: 16개 정답, <span class="bad">틀린 4개 포함 전부 확신도 100%</span></p>
+      <p><b>Claude</b>: 20개 정답, 확신도 90~99%</p>
+      <p class="small muted" style="margin-top:.6em">→ 20문항으로는 결론을 낼 수 없어 본 실험으로 확장</p>
+    </div>
+  </div>
+</section>
+
+<!-- 4 방법 -->
+<section class="slide">
+  <p class="tag">방법</p>
+  <h2>정답이 확실한 문제 141개를 모델 5개에게</h2>
+  <div class="flow">
+    <div class="box"><b>① 문항 141개</b><span class="small">수학 61 · 컴퓨터 80<br>계산·코드 문항 정답은 <b>코드로 직접 계산</b><br>유명 문제는 숫자를 바꿈</span></div>
+    <div class="box"><b>② 난이도 사다리</b><span class="small">곱셈·요일·코드 추적·글자 세기 등 6종을 10단계로 점점 어렵게</span></div>
+    <div class="box"><b>③ 모델 5개</b><span class="small">Claude Haiku · Sonnet · Opus 5.5<br>Gemini 3.5 Flash · Flash-Lite<br>매번 <b>새 대화</b>, 도구 끔</span></div>
+    <div class="box"><b>④ 답 + 확신도</b><span class="small">{"answer", "confidence": 0~100}<br>Claude는 문항마다 3번 반복<br>→ 규칙으로 자동 채점</span></div>
+  </div>
+  <p class="small muted" style="margin-top:1em">지표: <b>ECE</b>(확신도와 정답률의 평균 차이, 0이 이상적) · <b>AUROC</b>(확신도로 맞은 답/틀린 답을 가려내는 정도, 0.5=못 가림) · <b>자신 있게 틀림</b>(확신도 90% 이상인데 오답)</p>
+  <p class="small muted">응답 <span data-v="total_n"></span>건 · 모든 원본 응답과 코드는 GitHub에 공개</p>
+</section>
+
+<!-- 5 결과: 모델 비교 -->
+<section class="slide">
+  <p class="tag">결과 ①</p>
+  <h2>모델마다 확신도의 '의미'가 다르다</h2>
+  <div id="modelTable"></div>
+  <p class="small" style="margin-top:.8em" id="modelTakeaway"></p>
+</section>
+
+<!-- 6 결과: 신뢰도 그림 -->
+<section class="slide">
+  <p class="tag">결과 ②</p>
+  <h2>말한 확신도 vs 실제 정답률</h2>
+  <p class="small muted">점이 대각선 위 = 말한 만큼 맞힘 · 대각선 아래 = 과신 · 점 크기 = 응답 수</p>
+  <div class="charts" id="reliab" style="grid-template-columns:repeat(5,1fr)"></div>
+  <p class="small" id="reliabTakeaway"></p>
+</section>
+
+<!-- 7 결과: 사다리 -->
+<section class="slide">
+  <p class="tag">결과 ③</p>
+  <h2>어려워질 때 확신도도 따라 내려갈까</h2>
+  <p class="small muted">실선 = 실제 정답률, 점선 = 말한 확신도 (Claude 3개 모델)</p>
+  <div class="charts" id="ladders" style="grid-template-columns:repeat(3,1fr)"></div>
+  <p class="small">12자리 곱셈·코드 추적은 끝까지 거의 다 맞힘 → <b>틀린 곳은 '긴 문자열 세기'에 몰림</b>. Claude는 이때 확신도를 낮췄지만 정답률만큼은 아니었다.</p>
+</section>
+
+<!-- 8 데모 -->
+<section class="slide demo">
+  <p class="tag" style="color:#7a9cff">라이브 데모 · 3분</p>
+  <h2>직접 물어보기</h2>
+  <div class="cols3" style="margin-top:.6em">
+    <div class="box"><b>① 같은 문제, 다른 AI</b><p class="small muted">48271 × 69621 = ?<br>Gemini Flash-Lite vs Claude</p></div>
+    <div class="box"><b>② 코드 출력 맞히기</b><p class="small muted">파이썬 sum(i*i …)<br>확신도 100%로 틀리는지</p></div>
+    <div class="box"><b>③ 3번 물어보기</b><p class="small muted">긴 문자열 글자 세기<br>답이 흔들리면 경고</p></div>
+  </div>
+  <p class="small muted" style="margin-top:1.2em">localhost:5173 · 실제 모델에 실시간으로 묻는다</p>
+</section>
+
+<!-- 9 검증 -->
+<section class="slide">
+  <p class="tag">검증</p>
+  <h2>결과를 믿을 수 있는지 어떻게 확인했나</h2>
+  <div class="cols3">
+    <div class="box"><b>정답이 맞나</b><p class="small">계산·코드 문항 정답은 사람이 아니라 <b>코드가 계산</b> (파이썬·노드로 실행)</p></div>
+    <div class="box"><b>채점이 맞나</b><p class="small">"2,812,160원", "65%", "[1, 10, 3]"처럼 같은 답을 다르게 써도 맞게 채점하는지 <b>테스트 50개</b> 통과</p></div>
+    <div class="box"><b>문항이 공정한가</b><p class="small">응답을 살펴보다 <b>문항 오류 발견</b>: "1026년(그레고리력) 요일" → 그레고리력은 1582년 도입이라 '전제 오류'도 맞는 답 → 정답 인정 후 재채점</p></div>
+  </div>
+  <p class="small muted" style="margin-top:1em">같은 질문을 Claude에 3번씩 → 한 번의 우연이 아닌지 확인 · 원본 응답 전부 공개(results/raw)</p>
+</section>
+
+<!-- 10 개선 -->
+<section class="slide">
+  <p class="tag">개선</p>
+  <h2>발견한 문제 → 고친 방법 → 다시 확인</h2>
+  <div class="cols" style="align-items:start">
+    <div>
+      <p><b>발견</b>: 쉬운 문제에서 한 번씩 실수하고도 확신도 98~99%<br><span class="small muted">Opus "1~200 중 3 또는 7의 배수 개수" → 86 (정답 85), 확신도 98<br>Haiku 행렬 거듭제곱 → 144 (정답 10946), 확신도 99</span></p>
+      <p style="margin-top:.6em"><b>고친 방법 ① 점검 프롬프트</b><br><span class="small">전제 확인 → 다른 방법으로 검산 → 세기는 10개씩 묶어 세기 → 검산 결과로 확신도 정하기</span></p>
+      <p style="margin-top:.6em"><b>고친 방법 ② 3번 물어보기</b><br><span class="small">같은 질문을 새 대화로 3번 → 답이 다르면 "검산 필요"</span></p>
+    </div>
+    <div id="fixTable"></div>
+  </div>
+</section>
+
+<!-- 11 3번 물어보기 -->
+<section class="slide">
+  <p class="tag">개선 ②</p>
+  <h2>3번 물어보면 '자신 있게 틀린 답'이 잡힌다</h2>
+  <div id="consBody"></div>
+</section>
+
+<!-- 12 한계 -->
+<section class="slide">
+  <p class="tag">한계와 남은 과제</p>
+  <h2>이 결과를 어디까지 믿어도 되나</h2>
+  <ul>
+    <li><b>Gemini는 무료 한도 때문에</b> 기본 81문항을 1번씩만 물었다 → Claude보다 응답 수가 적다</li>
+    <li>점검 프롬프트는 자신 있게 틀린 답을 없앴지만, <b>확신도를 전반적으로 더 낮춰</b> ECE는 조금 나빠졌다 (원래 약간 겸손했던 모델이 더 겸손해짐)</li>
+    <li>3번 물어보기는 <b>비용이 3배</b> → 중요한 답에만 쓰는 것이 현실적</li>
+    <li>수학·컴퓨터 문제만 다뤘다. 정답이 애매한 분야(법, 의료, 시사)는 따로 확인해야 한다</li>
+    <li>GPT 등 다른 회사 모델은 포함하지 못했다 (유료 API)</li>
+  </ul>
+</section>
+
+<!-- 13 결론 -->
+<section class="slide">
+  <p class="tag">결론</p>
+  <h2>안경 속 AI가 "99% 확신"이라고 하면?</h2>
+  <div class="cols3" style="margin-top:.4em">
+    <div class="box"><b>어떤 AI냐에 따라 다르다</b><p class="small" id="concl1"></p></div>
+    <div class="box"><b>틀릴 때도 확신한다</b><p class="small" id="concl2"></p></div>
+    <div class="box"><b>대처법은 있다</b><p class="small">같은 질문을 새로 3번 묻고, 답이 다르면 믿지 않기. 검산을 시키는 프롬프트로 '자신 있게 틀림'을 0건으로 줄였다.</p></div>
+  </div>
+  <p class="quote" style="margin-top:1em;font-size:1.25em">AI의 확신도는 '정답의 증거'가 아니라<br>모델마다 따로 검증해야 하는 숫자다.</p>
+</section>
+
+<!-- 14 끝 -->
+<section class="slide">
+  <div style="margin:auto 0">
+    <h1>감사합니다</h1>
+    <p>코드·데이터·원본 응답: <b>github.com/ohc030307/ai-confidence-calibration</b></p>
+    <p class="muted">자세한 결과와 프롬프트 전문: 결과보고서</p>
+  </div>
+</section>
+
+</div>
+<script>
+const $ = (s) => document.querySelector(s);
+const pct = (v, d = 0) => (v == null ? '–' : (v * 100).toFixed(d) + '%');
+const KEY = { 'Haiku 5.5': 'haiku', 'Sonnet 5.5': 'sonnet', 'Opus 5.5': 'opus', 'Gemini Flash-Lite': 'glite', 'Gemini Flash': 'gflash' };
+const COLOR = (n) => `var(--${KEY[n]})`;
+const dot = (n) => `<span class="dot" style="background:${COLOR(n)}"></span>`;
+
+function reliabilitySVG(bins, color) {
+  const w = 260, h = 250, p = { l: 38, r: 8, t: 8, b: 30 };
+  const x = (v) => p.l + v * (w - p.l - p.r), y = (v) => h - p.b - v * (h - p.t - p.b);
+  const maxN = Math.max(...bins.map((b) => b.n), 1);
+  let g = '';
+  for (const t of [0, .5, 1]) {
+    g += `<line x1="${x(0)}" x2="${x(1)}" y1="${y(t)}" y2="${y(t)}" stroke="#e2e4e8"/><text x="${p.l - 5}" y="${y(t) + 4}" font-size="11" text-anchor="end" fill="#5d6670">${t * 100}%</text>`;
+    g += `<text x="${x(t)}" y="${h - p.b + 15}" font-size="11" text-anchor="middle" fill="#5d6670">${t * 100}%</text>`;
+  }
+  g += `<line x1="${x(0)}" y1="${y(0)}" x2="${x(1)}" y2="${y(1)}" stroke="#5d6670" stroke-dasharray="4 4"/>`;
+  for (const b of bins) {
+    const r = 4 + 13 * Math.sqrt(b.n / maxN);
+    g += `<line x1="${x(b.conf)}" x2="${x(b.conf)}" y1="${y(b.conf)}" y2="${y(b.acc)}" stroke="${color}" stroke-opacity=".4" stroke-width="2"/>`;
+    g += `<circle cx="${x(b.conf)}" cy="${y(b.acc)}" r="${r}" fill="${color}" fill-opacity=".75"/>`;
+  }
+  return `<svg viewBox="0 0 ${w} ${h}">${g}</svg>`;
+}
+function ladderSVG(byModel) {
+  const w = 300, h = 200, p = { l: 36, r: 8, t: 8, b: 26 };
+  const x = (lv) => p.l + ((lv - 1) / 9) * (w - p.l - p.r), y = (v) => h - p.b - v * (h - p.t - p.b);
+  let g = '';
+  for (const t of [0, .5, 1]) g += `<line x1="${x(1)}" x2="${x(10)}" y1="${y(t)}" y2="${y(t)}" stroke="#e2e4e8"/><text x="${p.l - 5}" y="${y(t) + 4}" font-size="11" text-anchor="end" fill="#5d6670">${t * 100}%</text>`;
+  g += `<text x="${x(1)}" y="${h - 8}" font-size="11" fill="#5d6670">쉬움</text><text x="${x(10)}" y="${h - 8}" font-size="11" text-anchor="end" fill="#5d6670">어려움</text>`;
+  for (const [n, lv] of Object.entries(byModel)) {
+    if (!n.startsWith('Haiku') && !n.startsWith('Sonnet') && !n.startsWith('Opus')) continue;
+    const path = (k) => lv.map((q, i) => `${i ? 'L' : 'M'}${x(q.level)},${y(q[k])}`).join(' ');
+    g += `<path d="${path('acc')}" fill="none" stroke="${COLOR(n)}" stroke-width="2.5"/><path d="${path('conf')}" fill="none" stroke="${COLOR(n)}" stroke-width="2" stroke-dasharray="5 4"/>`;
+  }
+  return `<svg viewBox="0 0 ${w} ${h}">${g}</svg>`;
+}
+
+function fill(S) {
+  const base = S.conditions.base, fix = S.conditions.fix;
+  const names = Object.keys(base.models);
+  document.querySelectorAll('[data-v=total_n]').forEach((e) => (e.textContent = (base.overall.n + (fix ? fix.overall.n : 0)).toLocaleString()));
+  // 결과 ① 표 (Claude는 기본 81문항 기준으로 맞춰 비교)
+  const core = base.core;
+  $('#modelTable').innerHTML = `<table><thead><tr><th>모델 (기본 81문항)</th><th>정답률</th><th>평균 확신도</th><th>확신도를 100%로 말한 비율</th><th>90%↑인데 틀림</th><th>틀렸을 때 확신도</th></tr></thead><tbody>${
+    names.map((n) => { const c = core[n]; const m = base.models[n]; const h100 = (base.items || []).flatMap((it) => (it.id.startsWith('M') || it.id.startsWith('C')) && it.type !== '사다리' ? (it.models[n] || []) : []); const tot = h100.length;
+      return `<tr><td>${dot(n)}${n}</td><td>${pct(c.acc, 1)}</td><td>${pct(c.conf, 1)}</td><td>${pct(h100.filter((r) => r.confidence >= 100).length / tot)}</td><td class="${c.confident_wrong ? 'bad' : ''}">${c.confident_wrong}건 / ${c.n}건</td><td class="${c.conf_when_wrong >= .9 ? 'bad' : ''}">${c.conf_when_wrong == null ? '–' : pct(c.conf_when_wrong)}</td></tr>`; }).join('')}</tbody></table>`;
+  const gl = core['Gemini Flash-Lite'];
+  $('#modelTakeaway').innerHTML = gl ? `<b>Gemini Flash-Lite는 정답률 ${pct(gl.acc)}인데 모든 답에 확신도 100%</b> → 이 모델의 "100%"는 아무 정보도 주지 않는다. Claude는 100%라고 거의 말하지 않았고, 141문항 전체에서 틀렸을 때 확신도가 평균 ${['Haiku 5.5','Sonnet 5.5','Opus 5.5'].map((n) => pct(base.models[n].stated.conf_when_wrong)).join('·')}로 내려갔다. 다만 기본 문항에서 한 번씩 한 실수는 98~99%였다.` : '';
+  $('#reliab').innerHTML = names.map((n) => `<div><p class="small" style="margin:0">${dot(n)}${n}</p>${reliabilitySVG(base.models[n].reliability, COLOR(n))}</div>`).join('');
+  $('#reliabTakeaway').innerHTML = 'Claude 3개 모델은 점이 대각선 근처(약간 위 = 오히려 조금 겸손). Gemini는 모든 점이 100% 한 줄에 모여 있다.';
+  const L = base.ladders || {};
+  $('#ladders').innerHTML = ['곱셈', '코드추적', '글자세기'].filter((k) => L[k]).map((k) => `<div><p class="small" style="margin:0"><b>${k}</b></p>${ladderSVG(L[k])}</div>`).join('');
+  // 개선 표
+  if (fix) {
+    const cl = names.filter((n) => fix.models[n] && n.indexOf('Gemini') < 0);
+    const row = (label, f, fmt, lowGood) => `<tr><td>${label}</td>${cl.map((n) => { const a = f(base.models[n]), b = f(fix.models[n]); const good = lowGood ? b < a : b > a;
+      return `<td>${fmt(a)} → <span class="${good ? 'good' : 'bad'}">${fmt(b)}</span></td>`; }).join('')}</tr>`;
+    $('#fixTable').innerHTML = `<p class="small muted">점검 프롬프트 전 → 후 (Claude, 141문항 × 3번)</p><table><thead><tr><th></th>${cl.map((n) => `<th>${n.replace(' 5.5', '')}</th>`).join('')}</tr></thead><tbody>
+      ${row('90%↑인데 틀림', (m) => m.stated.confident_wrong, (v) => v + '건', true)}
+      ${row('정답률', (m) => m.stated.acc, (v) => pct(v, 1), false)}
+      ${row('AUROC', (m) => m.stated.auroc, (v) => v.toFixed(2), false)}
+      ${row('ECE', (m) => m.stated.ece, (v) => v.toFixed(3), true)}
+      </tbody></table><p class="small muted">AUROC↑ = 확신도로 오답을 더 잘 가려냄 · ECE는 확신도가 전반적으로 낮아져 조금 나빠짐</p>`;
+  }
+  // 3번 물어보기
+  const flagged = [], items = base.items;
+  let cw = 0, caught = 0, okFlag = 0, okTotal = 0;
+  for (const it of items) for (const [n, rs] of Object.entries(it.models)) {
+    if (rs.length < 3) continue;
+    const ans = rs.map((r) => String(r.answer).replace(/\s|,/g, ''));
+    const unanimous = ans.every((a) => a === ans[0]);
+    for (const r of rs) {
+      if (r.correct) { okTotal++; if (!unanimous) okFlag++; }
+      else if (r.confidence >= 90) { cw++; if (!unanimous) { caught++; flagged.push({ it, n, r }); } }
+    }
+  }
+  $('#consBody').innerHTML = `<div class="cols"><div><p class="big">${caught} / ${cw}</p><p>확신도 90% 이상으로 틀린 답 중, <b>3번 답이 서로 달라서 잡아낸 것</b></p>
+    <p class="small muted" style="margin-top:.6em">대가: 맞은 답 ${okTotal.toLocaleString()}개 중 ${okFlag}개(${pct(okFlag / okTotal, 1)})도 '검산 필요'로 표시됨</p></div>
+    <div class="box small">${flagged.slice(0, 4).map(({ it, n, r }) => `<p>${dot(n)}<b>${it.id}</b> ${it.question.split('\n')[0].slice(0, 34)}… → <span class="bad">${String(r.answer).slice(0, 14)}</span> (${r.confidence}%) · 정답 ${String(it.gold).slice(0, 14)}</p>`).join('')}</div></div>`;
+  const g = core['Gemini Flash-Lite'], o = core['Opus 5.5'];
+  $('#concl1').textContent = g ? `Claude는 확신도가 실제 정답률과 거의 맞았지만, Gemini Flash-Lite는 ${pct(g.acc)}만 맞히면서 늘 100%라고 했다.` : '';
+  $('#concl2').textContent = `가장 정확한 모델도 한 번씩 확신도 98~99%로 틀렸다. 확신도만 보고 베끼면 바로 그 문제를 틀린다.`;
+}
+
+// 슬라이드 넘기기: → / 스페이스 / 클릭 = 다음, ← = 이전, 슬라이드 번호 표시
+const slides = [...document.querySelectorAll('section.slide')];
+slides.forEach((s, i) => s.insertAdjacentHTML('beforeend', `<span class="num">${i + 1} / ${slides.length}</span>`));
+let cur = Math.max(0, Math.min(slides.length - 1, (parseInt(location.hash.slice(1)) || 1) - 1));
+const show = (i) => { cur = Math.max(0, Math.min(slides.length - 1, i)); slides.forEach((s, j) => s.classList.toggle('on', j === cur)); history.replaceState(null, '', '#' + (cur + 1)); };
+addEventListener('keydown', (e) => { if (['ArrowRight', 'PageDown', ' '].includes(e.key)) show(cur + 1); if (['ArrowLeft', 'PageUp'].includes(e.key)) show(cur - 1); if (e.key === 'f') document.documentElement.requestFullscreen?.(); });
+$('#deck').addEventListener('click', (e) => { if (e.clientX > innerWidth / 3) show(cur + 1); else show(cur - 1); });
+show(cur);
+(async () => {
+  for (const p of ['results/summary.json', '../results/summary.json']) { try { const r = await fetch(p, { cache: 'no-store' }); if (r.ok) return fill(await r.json()); } catch {} }
+})();
+</script>
+</body>
+</html>

@@ -28,6 +28,7 @@ CASES = [
     ("C22", "[1, 3, 2, 5, 9, 8]", True), ("C22", "1,3,2,5,9,8", True), ("C22", "1,2,3,5,9,8", False),
     ("C26", "O(n^2)", True), ("C26", "O(n²)", True), ("C26", "O(n log n)", False),
     ("C33", "전제 오류", True), ("C33", "4", False),
+    ("M61", "전제 오류", True), ("M61", "금요일", True), ("M61", "목요일", False),  # 1582년 이전 그레고리력
 ]
 
 fails = [(q, a, exp) for q, a, exp in CASES if is_correct(Q[q], a) != exp]

@@ -54,7 +54,7 @@ def is_correct(q, answer):
     if q["kind"] == "premise":
         return says_premise
     if says_premise:
-        return False
+        return bool(q.get("premise_ok"))
     if q["kind"] == "str":
         return na == norm(q["answer"]) or na in {norm(x) for x in q["accept"]}
     # num
