@@ -154,6 +154,62 @@ def stats(rows, key="confidence"):
     }
 
 
+def bootstrap(rows, B=1000, seed=7):
+    """95% 신뢰구간: 문항 단위로 다시 뽑기(같은 문항의 3회 응답은 함께 뽑는다).
+    한 문항을 3번 물은 응답은 서로 독립이 아니므로, 응답 단위로 뽑으면 구간이 실제보다 좁게 나온다."""
+    import random
+    groups = defaultdict(list)
+    for r in rows:
+        groups[r["qid"]].append(r)
+    keys = list(groups)
+    rng = random.Random(seed)
+    samples = defaultdict(list)
+    for _ in range(B):
+        rs = [r for k in rng.choices(keys, k=len(keys)) for r in groups[k]]
+        samples["acc"].append(sum(r["correct"] for r in rs) / len(rs))
+        samples["conf"].append(sum(r["confidence"] for r in rs) / len(rs) / 100)
+        samples["ece"].append(ece(rs))
+        a = auroc(rs)
+        if a is not None:
+            samples["auroc"].append(a)
+    out = {}
+    for k, v in samples.items():
+        if len(v) >= B * 0.9:  # 오답이 거의 없어 AUROC를 못 구한 표본이 많으면 구간을 내지 않는다
+            v = sorted(v)
+            out[k] = [v[int(0.025 * len(v))], v[int(0.975 * len(v)) - 1]]
+    return out
+
+
+def paired_diff(base_rows, fix_rows, B=1000, seed=11):
+    """개선 전→후 차이의 95% 신뢰구간 (같은 문항 묶음을 두 조건에서 함께 뽑음)"""
+    import random
+    gb, gf = defaultdict(list), defaultdict(list)
+    for r in base_rows:
+        gb[r["qid"]].append(r)
+    for r in fix_rows:
+        gf[r["qid"]].append(r)
+    keys = [k for k in gb if k in gf]
+    rng = random.Random(seed)
+    d = defaultdict(list)
+    for _ in range(B):
+        ks = rng.choices(keys, k=len(keys))
+        b = [r for k in ks for r in gb[k]]
+        f = [r for k in ks for r in gf[k]]
+        d["acc"].append(sum(r["correct"] for r in f) / len(f) - sum(r["correct"] for r in b) / len(b))
+        d["ece"].append(ece(f) - ece(b))
+        d["confident_wrong"].append(sum(1 for r in f if not r["correct"] and r["confidence"] >= 90)
+                                    - sum(1 for r in b if not r["correct"] and r["confidence"] >= 90))
+        ab, af = auroc(b), auroc(f)
+        if ab is not None and af is not None:
+            d["auroc"].append(af - ab)
+    out = {}
+    for k, v in d.items():
+        v = sorted(v)
+        out[k] = {"lo": v[int(0.025 * len(v))], "hi": v[int(0.975 * len(v)) - 1],
+                  "p_improve": sum(1 for x in v if (x < 0 if k in ("ece", "confident_wrong") else x > 0)) / len(v)}
+    return out
+
+
 def reliability(rows, key="confidence"):
     """신뢰도 그림용: 확신도 구간별 (평균 확신도, 정답률, 개수)"""
     edges = [0, 50, 70, 80, 90, 95, 100.01]
@@ -203,7 +259,8 @@ def summarize(rows):
         if not mr:
             continue
         models[MODEL_NAME[m]] = {
-            "stated": stats(mr), "consistency": stats(mr, "consistency"),
+            "stated": stats(mr), "consistency": stats(mr, "consistency"), "ci": bootstrap(mr),
+            "core_ci": bootstrap([r for r in mr if r["type"] != "사다리"]),
             "by_domain": by(mr, "domain"), "by_type": by(mr, "type"),
             "reliability": reliability(mr), "reliability_consistency": reliability(mr, "consistency"),
             "conf_hist": dict(Counter(int(r["confidence"] // 10 * 10) if r["confidence"] < 100 else 100 for r in mr)),
@@ -248,6 +305,15 @@ def main():
     if "base" in result["conditions"]:
         result["calibration_table"] = {
             name: m["reliability"] for name, m in result["conditions"]["base"]["models"].items()}
+    # 개선 전→후 차이의 신뢰구간 (같은 문항으로 둘 다 실행한 모델만)
+    base_rows = [r for r in all_rows if r["cond"] == "base"]
+    fix_rows = [r for r in all_rows if r["cond"] == "fix"]
+    result["fix_vs_base"] = {}
+    for m in MODEL_ORDER:
+        b = [r for r in base_rows if r["model"] == m]
+        f = [r for r in fix_rows if r["model"] == m]
+        if b and f and len({r["qid"] for r in f}) >= 0.9 * len({r["qid"] for r in b}):
+            result["fix_vs_base"][MODEL_NAME[m]] = paired_diff(b, f)
     with open(ROOT / "results/graded.csv", "w", newline="", encoding="utf-8-sig") as f:
         cols = ["cond", "qid", "model", "rep", "domain", "type", "difficulty", "gold", "answer", "confidence", "consistency", "correct", "check"]
         w = csv.DictWriter(f, fieldnames=cols, extrasaction="ignore")

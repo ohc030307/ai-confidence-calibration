@@ -212,6 +212,7 @@
   <ul>
     <li><b>Gemini는 무료 한도 때문에</b> 기본 81문항을 1번씩만 물었다 → Claude보다 응답 수가 적다</li>
     <li>점검 프롬프트는 자신 있게 틀린 답을 없앴지만, <b>확신도를 전반적으로 더 낮춰</b> ECE는 조금 나빠졌다 (원래 약간 겸손했던 모델이 더 겸손해짐)</li>
+    <li>점검 프롬프트의 효과는 <b>건수가 적어 아직 확정이 아니다</b> (4건→0건, 신뢰구간이 0 포함)</li>
     <li>3번 물어보기는 <b>비용이 3배</b> → 중요한 답에만 쓰는 것이 현실적</li>
     <li>수학·컴퓨터 문제만 다뤘다. 정답이 애매한 분야(법, 의료, 시사)는 따로 확인해야 한다</li>
     <li>GPT 등 다른 회사 모델은 포함하지 못했다 (유료 API)</li>
@@ -225,7 +226,7 @@
   <div class="cols3" style="margin-top:.4em">
     <div class="box"><b>어떤 AI냐에 따라 다르다</b><p class="small" id="concl1"></p></div>
     <div class="box"><b>틀릴 때도 확신한다</b><p class="small" id="concl2"></p></div>
-    <div class="box"><b>대처법은 있다</b><p class="small">같은 질문을 새로 3번 묻고, 답이 다르면 믿지 않기. 검산을 시키는 프롬프트로 '자신 있게 틀림'을 0건으로 줄였다.</p></div>
+    <div class="box"><b>대처법은 있다</b><p class="small">같은 질문을 새로 3번 묻고, 답이 다르면 믿지 않기. 검산을 시키는 프롬프트로 '자신 있게 틀림'이 4건→0건 (더 큰 실험으로 확인 필요).</p></div>
   </div>
   <p class="quote" style="margin-top:1em;font-size:1.25em">AI의 확신도는 '정답의 증거'가 아니라<br>모델마다 따로 검증해야 하는 숫자다.</p>
 </section>
@@ -329,7 +330,7 @@ function fill(S) {
       ${row('정답률', (m) => m.stated.acc, (v) => pct(v, 1), false)}
       ${row('AUROC', (m) => m.stated.auroc, (v) => v.toFixed(2), false)}
       ${row('ECE', (m) => m.stated.ece, (v) => v.toFixed(3), true)}
-      </tbody></table><p class="small muted">AUROC↑ = 확신도로 오답을 더 잘 가려냄 · ECE는 확신도가 전반적으로 낮아져 조금 나빠짐</p>`;
+      </tbody></table><p class="small muted">AUROC↑ = 확신도로 오답을 더 잘 가려냄 · ECE는 확신도가 전반적으로 낮아져 조금 나빠짐</p><p class="small"><b>주의</b>: 처음부터 4건뿐이라 통계적으로 확정은 못 함 (95% 신뢰구간이 0 포함) → 방향은 좋지만 더 큰 실험 필요</p>`;
   }
   // 3번 물어보기
   const flagged = [], items = base.items;
