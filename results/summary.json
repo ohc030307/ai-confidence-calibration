@@ -3,136 +3,136 @@
  "conditions": {
   "base": {
    "overall": {
-    "n": 1352,
-    "acc": 0.9644970414201184,
-    "conf": 0.9553772189349112,
-    "gap": -0.009119822485207152,
-    "ece": 0.018927514792899388,
-    "brier": 0.026473446745562127,
-    "auroc": 0.7548648389570553,
-    "wrong": 48,
-    "confident_wrong": 14,
-    "conf_when_wrong": 0.76375
+    "n": 1418,
+    "acc": 0.96262341325811,
+    "conf": 0.9574541607898449,
+    "gap": -0.005169252468265051,
+    "ece": 0.014520451339915363,
+    "brier": 0.028767348377997177,
+    "auroc": 0.694125371483862,
+    "wrong": 53,
+    "confident_wrong": 19,
+    "conf_when_wrong": 0.7860377358490567
    },
    "overall_consistency": {
-    "n": 1352,
-    "acc": 0.9644970414201184,
-    "conf": 0.9738658777120315,
-    "gap": 0.009368836291913096,
-    "ece": 0.01331360946745562,
-    "brier": 0.017258382642998026,
-    "auroc": 0.8885800102249489,
-    "wrong": 48,
-    "confident_wrong": 10,
-    "conf_when_wrong": 0.5416666666666666
+    "n": 1418,
+    "acc": 0.96262341325811,
+    "conf": 0.9750822755054067,
+    "gap": 0.012458862247296754,
+    "ece": 0.016220028208744672,
+    "brier": 0.01998119417019276,
+    "auroc": 0.8510401548137397,
+    "wrong": 53,
+    "confident_wrong": 15,
+    "conf_when_wrong": 0.5849056603773585
    },
    "by_domain": {
     "컴퓨터": {
-     "n": 765,
-     "acc": 0.9450980392156862,
-     "conf": 0.9410980392156862,
-     "gap": -0.0040000000000000036,
-     "ece": 0.024470588235294084,
-     "brier": 0.038196339869281046,
-     "auroc": 0.8136237897648686,
-     "wrong": 42,
-     "confident_wrong": 8,
-     "conf_when_wrong": 0.7323809523809524
+     "n": 790,
+     "acc": 0.9443037974683545,
+     "conf": 0.9429620253164558,
+     "gap": -0.0013417721518986792,
+     "ece": 0.021164556962025387,
+     "brier": 0.039519240506329115,
+     "auroc": 0.7815927370216914,
+     "wrong": 44,
+     "confident_wrong": 10,
+     "conf_when_wrong": 0.7445454545454545
     },
     "수학": {
-     "n": 587,
-     "acc": 0.989778534923339,
-     "conf": 0.9739863713798979,
-     "gap": -0.01579216354344115,
-     "ece": 0.015792163543441283,
-     "brier": 0.011195741056218058,
-     "auroc": 0.3024956970740103,
-     "wrong": 6,
-     "confident_wrong": 6,
-     "conf_when_wrong": 0.9833333333333333
+     "n": 628,
+     "acc": 0.9856687898089171,
+     "conf": 0.9756847133757962,
+     "gap": -0.009984076433120936,
+     "ece": 0.009984076433120933,
+     "brier": 0.015241878980891722,
+     "auroc": 0.24017232094776522,
+     "wrong": 9,
+     "confident_wrong": 9,
+     "conf_when_wrong": 0.9888888888888888
     }
    },
    "by_type": {
     "함정": {
-     "n": 119,
+     "n": 131,
      "acc": 1.0,
-     "conf": 0.9832773109243698,
-     "gap": -0.016722689075630237,
-     "ece": 0.016722689075630237,
-     "brier": 0.00046638655462184937,
+     "conf": 0.9848091603053435,
+     "gap": -0.01519083969465651,
+     "ece": 0.01519083969465651,
+     "brier": 0.00042366412213740514,
      "auroc": null,
      "wrong": 0,
      "confident_wrong": 0,
      "conf_when_wrong": null
     },
     "수표현": {
-     "n": 79,
-     "acc": 1.0,
-     "conf": 0.9856962025316456,
-     "gap": -0.014303797468354418,
-     "ece": 0.014303797468354418,
-     "brier": 0.00033544303797468415,
-     "auroc": null,
-     "wrong": 0,
-     "confident_wrong": 0,
-     "conf_when_wrong": null
+     "n": 83,
+     "acc": 0.9759036144578314,
+     "conf": 0.9863855421686748,
+     "gap": 0.010481927710843442,
+     "ece": 0.010481927710843442,
+     "brier": 0.02441566265060241,
+     "auroc": 0.06172839506172839,
+     "wrong": 2,
+     "confident_wrong": 2,
+     "conf_when_wrong": 1.0
     },
     "계산": {
-     "n": 198,
-     "acc": 0.9797979797979798,
-     "conf": 0.9810606060606061,
-     "gap": 0.0012626262626262985,
-     "ece": 0.005505050505050518,
-     "brier": 0.020861111111111108,
-     "auroc": 0.28350515463917525,
-     "wrong": 4,
-     "confident_wrong": 4,
-     "conf_when_wrong": 0.9925
+     "n": 219,
+     "acc": 0.9680365296803652,
+     "conf": 0.9828767123287672,
+     "gap": 0.014840182648401923,
+     "ece": 0.018675799086758024,
+     "brier": 0.03255936073059361,
+     "auroc": 0.21900269541778974,
+     "wrong": 7,
+     "confident_wrong": 7,
+     "conf_when_wrong": 0.9957142857142857
     },
     "알고리즘": {
-     "n": 82,
-     "acc": 0.9878048780487805,
-     "conf": 0.9713414634146342,
-     "gap": -0.016463414634146245,
-     "ece": 0.016463414634146252,
-     "brier": 0.013610975609756099,
-     "auroc": 0.05555555555555555,
+     "n": 86,
+     "acc": 0.9883720930232558,
+     "conf": 0.9726744186046511,
+     "gap": -0.0156976744186047,
+     "ece": 0.01569767441860469,
+     "brier": 0.012977906976744186,
+     "auroc": 0.07647058823529412,
      "wrong": 1,
      "confident_wrong": 1,
      "conf_when_wrong": 1.0
     },
     "개념": {
-     "n": 80,
+     "n": 85,
      "acc": 1.0,
-     "conf": 0.9882500000000001,
-     "gap": -0.011749999999999927,
-     "ece": 0.011749999999999927,
-     "brier": 0.00019250000000000034,
+     "conf": 0.9889411764705882,
+     "gap": -0.011058823529411788,
+     "ece": 0.011058823529411788,
+     "brier": 0.00018117647058823563,
      "auroc": null,
      "wrong": 0,
      "confident_wrong": 0,
      "conf_when_wrong": null
     },
     "전제오류": {
-     "n": 124,
+     "n": 137,
      "acc": 1.0,
-     "conf": 0.9588709677419355,
-     "gap": -0.041129032258064524,
-     "ece": 0.04112903225806455,
-     "brier": 0.002267741935483873,
+     "conf": 0.9627737226277372,
+     "gap": -0.037226277372262806,
+     "ece": 0.03722627737226275,
+     "brier": 0.002052554744525549,
      "auroc": null,
      "wrong": 0,
      "confident_wrong": 0,
      "conf_when_wrong": null
     },
     "코드추적": {
-     "n": 121,
-     "acc": 0.9586776859504132,
-     "conf": 0.9867768595041322,
-     "gap": 0.028099173553718937,
-     "ece": 0.028099173553718937,
-     "brier": 0.04157685950413223,
-     "auroc": 0.034482758620689655,
+     "n": 128,
+     "acc": 0.9609375,
+     "conf": 0.9875,
+     "gap": 0.026562500000000044,
+     "ece": 0.026562500000000044,
+     "brier": 0.039303125,
+     "auroc": 0.06097560975609756,
      "wrong": 5,
      "confident_wrong": 5,
      "conf_when_wrong": 1.0
@@ -909,41 +909,41 @@
     },
     "Gemini Flash-Lite": {
      "stated": {
-      "n": 47,
-      "acc": 0.7872340425531915,
+      "n": 96,
+      "acc": 0.84375,
       "conf": 1.0,
-      "gap": 0.21276595744680848,
-      "ece": 0.21276595744680848,
-      "brier": 0.2127659574468085,
+      "gap": 0.15625,
+      "ece": 0.15625,
+      "brier": 0.15625,
       "auroc": 0.5,
-      "wrong": 10,
-      "confident_wrong": 10,
+      "wrong": 15,
+      "confident_wrong": 15,
       "conf_when_wrong": 1.0
      },
      "consistency": {
-      "n": 47,
-      "acc": 0.7872340425531915,
+      "n": 96,
+      "acc": 0.84375,
       "conf": 1.0,
-      "gap": 0.21276595744680848,
-      "ece": 0.21276595744680848,
-      "brier": 0.2127659574468085,
+      "gap": 0.15625,
+      "ece": 0.15625,
+      "brier": 0.15625,
       "auroc": 0.5,
-      "wrong": 10,
-      "confident_wrong": 10,
+      "wrong": 15,
+      "confident_wrong": 15,
       "conf_when_wrong": 1.0
      },
      "ci": {
       "acc": [
-       0.6470588235294118,
-       0.9148936170212766
+       0.7578947368421053,
+       0.9230769230769231
       ],
       "conf": [
        1.0,
        1.0
       ],
       "ece": [
-       0.08510638297872342,
-       0.3529411764705882
+       0.07692307692307687,
+       0.2421052631578947
       ],
       "auroc": [
        0.5,
@@ -952,16 +952,16 @@
      },
      "core_ci": {
       "acc": [
-       0.6521739130434783,
-       0.95
+       0.7717391304347826,
+       0.9354838709677419
       ],
       "conf": [
        1.0,
        1.0
       ],
       "ece": [
-       0.050000000000000044,
-       0.34782608695652173
+       0.06451612903225812,
+       0.2282608695652174
       ],
       "auroc": [
        0.5,
@@ -970,45 +970,45 @@
      },
      "by_domain": {
       "수학": {
-       "n": 22,
-       "acc": 0.8636363636363636,
+       "n": 49,
+       "acc": 0.8775510204081632,
        "conf": 1.0,
-       "gap": 0.13636363636363635,
-       "ece": 0.13636363636363635,
-       "brier": 0.13636363636363635,
+       "gap": 0.12244897959183676,
+       "ece": 0.12244897959183676,
+       "brier": 0.12244897959183673,
        "auroc": 0.5,
-       "wrong": 3,
-       "confident_wrong": 3,
+       "wrong": 6,
+       "confident_wrong": 6,
        "conf_when_wrong": 1.0
       },
       "컴퓨터": {
-       "n": 25,
-       "acc": 0.72,
+       "n": 47,
+       "acc": 0.8085106382978723,
        "conf": 1.0,
-       "gap": 0.28,
-       "ece": 0.28,
-       "brier": 0.28,
+       "gap": 0.19148936170212771,
+       "ece": 0.19148936170212771,
+       "brier": 0.19148936170212766,
        "auroc": 0.5,
-       "wrong": 7,
-       "confident_wrong": 7,
+       "wrong": 9,
+       "confident_wrong": 9,
        "conf_when_wrong": 1.0
       }
      },
      "by_type": {
       "계산": {
-       "n": 11,
-       "acc": 0.8181818181818182,
+       "n": 24,
+       "acc": 0.7916666666666666,
        "conf": 1.0,
-       "gap": 0.18181818181818177,
-       "ece": 0.18181818181818177,
-       "brier": 0.18181818181818182,
+       "gap": 0.20833333333333337,
+       "ece": 0.20833333333333337,
+       "brier": 0.20833333333333334,
        "auroc": 0.5,
-       "wrong": 2,
-       "confident_wrong": 2,
+       "wrong": 5,
+       "confident_wrong": 5,
        "conf_when_wrong": 1.0
       },
       "함정": {
-       "n": 6,
+       "n": 15,
        "acc": 1.0,
        "conf": 1.0,
        "gap": 0.0,
@@ -1032,43 +1032,43 @@
        "conf_when_wrong": 1.0
       },
       "코드추적": {
-       "n": 8,
-       "acc": 0.375,
+       "n": 14,
+       "acc": 0.6428571428571429,
        "conf": 1.0,
-       "gap": 0.625,
-       "ece": 0.625,
-       "brier": 0.625,
+       "gap": 0.3571428571428571,
+       "ece": 0.3571428571428571,
+       "brier": 0.35714285714285715,
        "auroc": 0.5,
        "wrong": 5,
        "confident_wrong": 5,
        "conf_when_wrong": 1.0
       },
       "수표현": {
-       "n": 6,
-       "acc": 1.0,
+       "n": 9,
+       "acc": 0.7777777777777778,
        "conf": 1.0,
-       "gap": 0.0,
-       "ece": 0.0,
-       "brier": 0.0,
-       "auroc": null,
-       "wrong": 0,
-       "confident_wrong": 0,
-       "conf_when_wrong": null
+       "gap": 0.2222222222222222,
+       "ece": 0.2222222222222222,
+       "brier": 0.2222222222222222,
+       "auroc": 0.5,
+       "wrong": 2,
+       "confident_wrong": 2,
+       "conf_when_wrong": 1.0
       },
       "알고리즘": {
-       "n": 5,
-       "acc": 0.8,
+       "n": 9,
+       "acc": 0.8888888888888888,
        "conf": 1.0,
-       "gap": 0.19999999999999996,
-       "ece": 0.19999999999999996,
-       "brier": 0.2,
+       "gap": 0.11111111111111116,
+       "ece": 0.11111111111111116,
+       "brier": 0.1111111111111111,
        "auroc": 0.5,
        "wrong": 1,
        "confident_wrong": 1,
        "conf_when_wrong": 1.0
       },
       "개념": {
-       "n": 4,
+       "n": 8,
        "acc": 1.0,
        "conf": 1.0,
        "gap": 0.0,
@@ -1080,7 +1080,7 @@
        "conf_when_wrong": null
       },
       "전제오류": {
-       "n": 3,
+       "n": 13,
        "acc": 1.0,
        "conf": 1.0,
        "gap": 0.0,
@@ -1096,27 +1096,27 @@
       {
        "lo": 95,
        "hi": 100,
-       "n": 47,
+       "n": 96,
        "conf": 1.0,
-       "acc": 0.7872340425531915
+       "acc": 0.84375
       }
      ],
      "reliability_consistency": [
       {
        "lo": 95,
        "hi": 100,
-       "n": 47,
+       "n": 96,
        "conf": 1.0,
-       "acc": 0.7872340425531915
+       "acc": 0.84375
       }
      ],
      "conf_hist": {
-      "100": 47
+      "100": 96
      }
     },
     "Gemini Flash": {
      "stated": {
-      "n": 36,
+      "n": 53,
       "acc": 1.0,
       "conf": 1.0,
       "gap": 0.0,
@@ -1128,7 +1128,7 @@
       "conf_when_wrong": null
      },
      "consistency": {
-      "n": 36,
+      "n": 53,
       "acc": 1.0,
       "conf": 1.0,
       "gap": 0.0,
@@ -1169,7 +1169,7 @@
      },
      "by_domain": {
       "수학": {
-       "n": 16,
+       "n": 30,
        "acc": 1.0,
        "conf": 1.0,
        "gap": 0.0,
@@ -1181,7 +1181,7 @@
        "conf_when_wrong": null
       },
       "컴퓨터": {
-       "n": 20,
+       "n": 23,
        "acc": 1.0,
        "conf": 1.0,
        "gap": 0.0,
@@ -1195,7 +1195,7 @@
      },
      "by_type": {
       "계산": {
-       "n": 7,
+       "n": 15,
        "acc": 1.0,
        "conf": 1.0,
        "gap": 0.0,
@@ -1219,7 +1219,7 @@
        "conf_when_wrong": null
       },
       "코드추적": {
-       "n": 5,
+       "n": 6,
        "acc": 1.0,
        "conf": 1.0,
        "gap": 0.0,
@@ -1231,7 +1231,7 @@
        "conf_when_wrong": null
       },
       "함정": {
-       "n": 5,
+       "n": 8,
        "acc": 1.0,
        "conf": 1.0,
        "gap": 0.0,
@@ -1243,7 +1243,7 @@
        "conf_when_wrong": null
       },
       "전제오류": {
-       "n": 4,
+       "n": 7,
        "acc": 1.0,
        "conf": 1.0,
        "gap": 0.0,
@@ -1255,7 +1255,7 @@
        "conf_when_wrong": null
       },
       "수표현": {
-       "n": 1,
+       "n": 2,
        "acc": 1.0,
        "conf": 1.0,
        "gap": 0.0,
@@ -1279,7 +1279,7 @@
        "conf_when_wrong": null
       },
       "개념": {
-       "n": 4,
+       "n": 5,
        "acc": 1.0,
        "conf": 1.0,
        "gap": 0.0,
@@ -1295,7 +1295,7 @@
       {
        "lo": 95,
        "hi": 100,
-       "n": 36,
+       "n": 53,
        "conf": 1.0,
        "acc": 1.0
       }
@@ -1304,13 +1304,13 @@
       {
        "lo": 95,
        "hi": 100,
-       "n": 36,
+       "n": 53,
        "conf": 1.0,
        "acc": 1.0
       }
      ],
      "conf_hist": {
-      "100": 36
+      "100": 53
      }
     }
    },
@@ -1353,9 +1353,9 @@
     {
      "lo": 95,
      "hi": 100,
-     "n": 1112,
-     "conf": 0.9793525179856115,
-     "acc": 0.9892086330935251
+     "n": 1178,
+     "conf": 0.9805093378607811,
+     "acc": 0.9855687606112055
     }
    ],
    "ladders": {
@@ -2783,19 +2783,19 @@
      "conf_when_wrong": 0.98
     },
     "Gemini Flash-Lite": {
-     "n": 43,
-     "acc": 0.813953488372093,
+     "n": 92,
+     "acc": 0.8586956521739131,
      "conf": 1.0,
-     "gap": 0.18604651162790697,
-     "ece": 0.18604651162790697,
-     "brier": 0.18604651162790697,
+     "gap": 0.14130434782608692,
+     "ece": 0.14130434782608692,
+     "brier": 0.14130434782608695,
      "auroc": 0.5,
-     "wrong": 8,
-     "confident_wrong": 8,
+     "wrong": 13,
+     "confident_wrong": 13,
      "conf_when_wrong": 1.0
     },
     "Gemini Flash": {
-     "n": 31,
+     "n": 48,
      "acc": 1.0,
      "conf": 1.0,
      "gap": 0.0,
@@ -2969,6 +2969,14 @@
         "confidence": 100.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "4",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C02",
@@ -3039,6 +3047,22 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "-4 1",
+        "confidence": 100.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash": [
+       {
+        "rep": 1,
+        "answer": "-4 1",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C03",
@@ -3107,6 +3131,14 @@
         "rep": 3,
         "answer": "6",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "6",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -3255,6 +3287,14 @@
         "rep": 3,
         "answer": "177",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "177",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -3575,6 +3615,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "1,10,3",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C10",
@@ -3647,6 +3695,14 @@
        }
       ],
       "Gemini Flash": [
+       {
+        "rep": 1,
+        "answer": "false",
+        "confidence": 100.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
        {
         "rep": 1,
         "answer": "false",
@@ -3893,6 +3949,22 @@
         "rep": 3,
         "answer": "8",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "6",
+        "confidence": 100.0,
+        "correct": 0
+       }
+      ],
+      "Gemini Flash": [
+       {
+        "rep": 1,
+        "answer": "8",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -4205,6 +4277,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "2988",
+        "confidence": 100.0,
+        "correct": 0
+       }
       ]
      },
      "id": "C18",
@@ -4273,6 +4353,14 @@
         "rep": 3,
         "answer": "3",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "3",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -4423,6 +4511,14 @@
         "confidence": 97.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "20",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C21",
@@ -4491,6 +4587,14 @@
         "rep": 3,
         "answer": "[1, 3, 2, 5, 9, 8]",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "[1, 3, 2, 5, 9, 8]",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -4565,6 +4669,12 @@
        }
       ],
       "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "2",
+        "confidence": 100.0,
+        "correct": 1
+       },
        {
         "rep": 3,
         "answer": "2",
@@ -4647,6 +4757,14 @@
         "rep": 3,
         "answer": "6",
         "confidence": 90.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "6",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -5071,6 +5189,14 @@
         "confidence": 100.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C29",
@@ -5139,6 +5265,14 @@
         "rep": 3,
         "answer": "전제 오류",
         "confidence": 95.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -5297,6 +5431,14 @@
         "confidence": 95.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C32",
@@ -5375,6 +5517,14 @@
         "confidence": 100.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C33",
@@ -5443,6 +5593,22 @@
         "rep": 3,
         "answer": "전제 오류",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -5518,6 +5684,12 @@
       ],
       "Gemini Flash-Lite": [
        {
+        "rep": 1,
+        "answer": "4",
+        "confidence": 100.0,
+        "correct": 1
+       },
+       {
         "rep": 3,
         "answer": "4",
         "confidence": 100.0,
@@ -5591,6 +5763,14 @@
         "rep": 3,
         "answer": "2",
         "confidence": 95.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "2",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -5749,6 +5929,14 @@
         "confidence": 100.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "4",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C38",
@@ -5823,6 +6011,14 @@
       "Gemini Flash": [
        {
         "rep": 2,
+        "answer": "4",
+        "confidence": 100.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
         "answer": "4",
         "confidence": 100.0,
         "correct": 1
@@ -8831,6 +9027,14 @@
         "confidence": 100.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash": [
+       {
+        "rep": 1,
+        "answer": "100022",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M01",
@@ -8990,6 +9194,12 @@
       ],
       "Gemini Flash-Lite": [
        {
+        "rep": 1,
+        "answer": "29/21",
+        "confidence": 100.0,
+        "correct": 1
+       },
+       {
         "rep": 2,
         "answer": "29/21",
         "confidence": 100.0,
@@ -9076,6 +9286,12 @@
       ],
       "Gemini Flash-Lite": [
        {
+        "rep": 1,
+        "answer": "2812160원",
+        "confidence": 100.0,
+        "correct": 1
+       },
+       {
         "rep": 3,
         "answer": "2812160",
         "confidence": 100.0,
@@ -9151,6 +9367,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "123",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M05",
@@ -9219,6 +9443,14 @@
         "rep": 3,
         "answer": "3/2",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "3/2",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -9293,6 +9525,12 @@
        }
       ],
       "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "108",
+        "confidence": 100.0,
+        "correct": 1
+       },
        {
         "rep": 3,
         "answer": "108",
@@ -9466,6 +9704,12 @@
       ],
       "Gemini Flash": [
        {
+        "rep": 1,
+        "answer": "3360675291",
+        "confidence": 100.0,
+        "correct": 1
+       },
+       {
         "rep": 2,
         "answer": "3360675291",
         "confidence": 100.0,
@@ -9549,6 +9793,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "27",
+        "confidence": 100.0,
+        "correct": 0
+       }
       ]
      },
      "id": "M10",
@@ -9617,6 +9869,22 @@
         "rep": 3,
         "answer": "4",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "9",
+        "confidence": 100.0,
+        "correct": 0
+       }
+      ],
+      "Gemini Flash": [
+       {
+        "rep": 1,
+        "answer": "4",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -9692,7 +9960,21 @@
       ],
       "Gemini Flash-Lite": [
        {
+        "rep": 1,
+        "answer": "16",
+        "confidence": 100.0,
+        "correct": 1
+       },
+       {
         "rep": 3,
+        "answer": "16",
+        "confidence": 100.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash": [
+       {
+        "rep": 1,
         "answer": "16",
         "confidence": 100.0,
         "correct": 1
@@ -9769,6 +10051,12 @@
        }
       ],
       "Gemini Flash": [
+       {
+        "rep": 1,
+        "answer": "1806",
+        "confidence": 100.0,
+        "correct": 1
+       },
        {
         "rep": 2,
         "answer": "1806",
@@ -9931,6 +10219,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "200",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M15",
@@ -9999,6 +10295,22 @@
         "rep": 3,
         "answer": "118",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "118",
+        "confidence": 100.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash": [
+       {
+        "rep": 1,
+        "answer": "118",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -10079,6 +10391,14 @@
         "confidence": 100.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "10946",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M17",
@@ -10149,6 +10469,22 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "2",
+        "confidence": 100.0,
+        "correct": 0
+       }
+      ],
+      "Gemini Flash": [
+       {
+        "rep": 1,
+        "answer": "8",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M18",
@@ -10217,6 +10553,14 @@
         "rep": 3,
         "answer": "1625625",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "1625625",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -10291,6 +10635,14 @@
        }
       ],
       "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "31",
+        "confidence": 100.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash": [
        {
         "rep": 1,
         "answer": "31",
@@ -10375,6 +10727,14 @@
         "confidence": 100.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "32",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M21",
@@ -10443,6 +10803,14 @@
         "rep": 3,
         "answer": "0.65",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "0.65",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -10523,6 +10891,14 @@
         "confidence": 100.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "36",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M23",
@@ -10595,6 +10971,14 @@
        }
       ],
       "Gemini Flash": [
+       {
+        "rep": 1,
+        "answer": "2",
+        "confidence": 100.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
        {
         "rep": 1,
         "answer": "2",
@@ -10759,6 +11143,14 @@
        }
       ],
       "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "127",
+        "confidence": 100.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash": [
        {
         "rep": 1,
         "answer": "127",
@@ -10994,6 +11386,12 @@
       ],
       "Gemini Flash": [
        {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
+        "correct": 1
+       },
+       {
         "rep": 3,
         "answer": "전제 오류",
         "confidence": 100.0,
@@ -11075,6 +11473,14 @@
         "rep": 3,
         "answer": "전제 오류",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -11225,6 +11631,14 @@
         "confidence": 95.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M32",
@@ -11293,6 +11707,14 @@
         "rep": 3,
         "answer": "전제 오류",
         "confidence": 96.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -11365,6 +11787,14 @@
         "confidence": 96.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M34",
@@ -11435,6 +11865,22 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M35",
@@ -11503,6 +11949,22 @@
         "rep": 3,
         "answer": "9.9",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "9.9",
+        "confidence": 100.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash": [
+       {
+        "rep": 1,
+        "answer": "9.9",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -11586,6 +12048,12 @@
       ],
       "Gemini Flash-Lite": [
        {
+        "rep": 1,
+        "answer": "7",
+        "confidence": 100.0,
+        "correct": 1
+       },
+       {
         "rep": 2,
         "answer": "7",
         "confidence": 100.0,
@@ -11661,6 +12129,14 @@
         "confidence": 90.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "11",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M38",
@@ -11731,6 +12207,22 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "130도",
+        "confidence": 100.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash": [
+       {
+        "rep": 1,
+        "answer": "130",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M39",
@@ -11799,6 +12291,22 @@
         "rep": 3,
         "answer": "96",
         "confidence": 98.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "96%",
+        "confidence": 100.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash": [
+       {
+        "rep": 1,
+        "answer": "96%",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -13338,79 +13846,79 @@
   },
   "fix": {
    "overall": {
-    "n": 1269,
-    "acc": 0.9771473601260835,
-    "conf": 0.9505122143420016,
-    "gap": -0.02663514578408188,
-    "ece": 0.03524034672970851,
-    "brier": 0.01570039401103231,
-    "auroc": 0.9783092324805339,
-    "wrong": 29,
-    "confident_wrong": 0,
-    "conf_when_wrong": 0.6675862068965518
+    "n": 1350,
+    "acc": 0.9740740740740741,
+    "conf": 0.9534814814814816,
+    "gap": -0.020592592592592496,
+    "ece": 0.028681481481481474,
+    "brier": 0.019202814814814815,
+    "auroc": 0.8165127648017382,
+    "wrong": 35,
+    "confident_wrong": 6,
+    "conf_when_wrong": 0.7245714285714285
    },
    "overall_consistency": {
-    "n": 1269,
-    "acc": 0.9771473601260835,
-    "conf": 0.9800367743630156,
-    "gap": 0.0028894142369321196,
-    "ece": 0.003940110323089045,
-    "brier": 0.007617546624638823,
-    "auroc": 0.9959399332591768,
-    "wrong": 29,
-    "confident_wrong": 0,
-    "conf_when_wrong": 0.4252873563218391
+    "n": 1350,
+    "acc": 0.9740740740740741,
+    "conf": 0.9812345679012345,
+    "gap": 0.007160493827160441,
+    "ece": 0.00814814814814819,
+    "brier": 0.011604938271604939,
+    "auroc": 0.9096795219989137,
+    "wrong": 35,
+    "confident_wrong": 6,
+    "conf_when_wrong": 0.5238095238095238
    },
    "by_domain": {
     "컴퓨터": {
-     "n": 720,
-     "acc": 0.9597222222222223,
-     "conf": 0.9355555555555556,
-     "gap": -0.02416666666666667,
-     "ece": 0.03933333333333331,
-     "brier": 0.026570833333333335,
-     "auroc": 0.9625230799940117,
-     "wrong": 29,
-     "confident_wrong": 0,
-     "conf_when_wrong": 0.6675862068965518
+     "n": 760,
+     "acc": 0.9578947368421052,
+     "conf": 0.9389473684210526,
+     "gap": -0.0189473684210526,
+     "ece": 0.03331578947368423,
+     "brier": 0.029119736842105264,
+     "auroc": 0.8763950892857143,
+     "wrong": 32,
+     "confident_wrong": 3,
+     "conf_when_wrong": 0.69875
     },
     "수학": {
-     "n": 549,
-     "acc": 1.0,
-     "conf": 0.9701275045537341,
-     "gap": -0.029872495446265912,
-     "ece": 0.029872495446265936,
-     "brier": 0.0014440801457194907,
-     "auroc": null,
-     "wrong": 0,
-     "confident_wrong": 0,
-     "conf_when_wrong": null
+     "n": 590,
+     "acc": 0.9949152542372881,
+     "conf": 0.9722033898305085,
+     "gap": -0.022711864406779636,
+     "ece": 0.022711864406779667,
+     "brier": 0.006428474576271187,
+     "auroc": 0.03236797274275979,
+     "wrong": 3,
+     "confident_wrong": 3,
+     "conf_when_wrong": 1.0
     }
    },
    "by_type": {
     "함정": {
-     "n": 108,
+     "n": 120,
      "acc": 1.0,
-     "conf": 0.9801851851851852,
-     "gap": -0.01981481481481484,
-     "ece": 0.01981481481481484,
-     "brier": 0.000548148148148149,
+     "conf": 0.9821666666666666,
+     "gap": -0.017833333333333368,
+     "ece": 0.017833333333333368,
+     "brier": 0.000493333333333334,
      "auroc": null,
      "wrong": 0,
      "confident_wrong": 0,
      "conf_when_wrong": null
     },
     "계산": {
-     "n": 180,
-     "acc": 1.0,
-     "conf": 0.9722777777777778,
-     "gap": -0.027722222222222204,
-     "ece": 0.02772222222222213,
-     "brier": 0.0013994444444444451,
-     "auroc": null,
-     "wrong": 0,
-     "confident_wrong": 0,
-     "conf_when_wrong": null
+     "n": 200,
+     "acc": 0.985,
+     "conf": 0.97505,
+     "gap": -0.009950000000000014,
+     "ece": 0.00994999999999998,
+     "brier": 0.0162595,
+     "auroc": 0.04314720812182741,
+     "wrong": 3,
+     "confident_wrong": 3,
+     "conf_when_wrong": 1.0
     },
     "사다리": {
      "n": 540,
@@ -13425,64 +13933,64 @@
      "conf_when_wrong": 0.6675862068965518
     },
     "수표현": {
-     "n": 72,
-     "acc": 1.0,
-     "conf": 0.98125,
-     "gap": -0.018750000000000044,
-     "ece": 0.018750000000000044,
-     "brier": 0.0004902777777777786,
-     "auroc": null,
-     "wrong": 0,
-     "confident_wrong": 0,
-     "conf_when_wrong": null
+     "n": 80,
+     "acc": 0.9875,
+     "conf": 0.983125,
+     "gap": -0.004375000000000018,
+     "ece": 0.004375000000000018,
+     "brier": 0.012941250000000001,
+     "auroc": 0.04430379746835443,
+     "wrong": 1,
+     "confident_wrong": 1,
+     "conf_when_wrong": 1.0
     },
     "개념": {
-     "n": 72,
+     "n": 80,
      "acc": 1.0,
-     "conf": 0.9845833333333333,
-     "gap": -0.015416666666666745,
-     "ece": 0.015416666666666745,
-     "brier": 0.00031250000000000055,
+     "conf": 0.9861249999999999,
+     "gap": -0.013875000000000082,
+     "ece": 0.013875000000000082,
+     "brier": 0.0002812500000000005,
      "auroc": null,
      "wrong": 0,
      "confident_wrong": 0,
      "conf_when_wrong": null
     },
     "코드추적": {
-     "n": 108,
-     "acc": 1.0,
-     "conf": 0.9807407407407408,
-     "gap": -0.019259259259259198,
-     "ece": 0.019259259259259198,
-     "brier": 0.0004722222222222231,
-     "auroc": null,
-     "wrong": 0,
-     "confident_wrong": 0,
-     "conf_when_wrong": null
+     "n": 120,
+     "acc": 0.9916666666666667,
+     "conf": 0.9826666666666667,
+     "gap": -0.009000000000000008,
+     "ece": 0.009000000000000008,
+     "brier": 0.008758333333333335,
+     "auroc": 0.046218487394957986,
+     "wrong": 1,
+     "confident_wrong": 1,
+     "conf_when_wrong": 1.0
     },
     "전제오류": {
-     "n": 117,
+     "n": 130,
      "acc": 1.0,
-     "conf": 0.9517948717948719,
-     "gap": -0.04820512820512812,
-     "ece": 0.048205128205128296,
-     "brier": 0.00295897435897436,
+     "conf": 0.9566153846153845,
+     "gap": -0.043384615384615466,
+     "ece": 0.043384615384615424,
+     "brier": 0.002663076923076924,
      "auroc": null,
      "wrong": 0,
      "confident_wrong": 0,
      "conf_when_wrong": null
     },
     "알고리즘": {
-     "n": 72,
-     "acc": 1.0,
-     "conf": 0.9659722222222222,
-     "gap": -0.03402777777777777,
-     "ece": 0.03402777777777773,
-     "brier": 0.001748611111111112,
-     "auroc": null,
-     "wrong": 0,
-     "confident_wrong": 0,
-     "conf_when_wrong": null
+     "n": 80,
+     "acc": 0.9875,
+     "conf": 0.969375,
+     "gap": -0.018125000000000058,
+     "ece": 0.01812500000000009,
+     "brier": 0.014073750000000001,
+     "auroc": 0.04430379746835443,
+     "wrong": 1,
+     "confident_wrong": 1,
+     "conf_when_wrong": 1.0
     }
    },
    "models": {
@@ -14233,6 +14741,201 @@
       "90": 388,
       "80": 35
      }
+    },
+    "Gemini Flash-Lite": {
+     "stated": {
+      "n": 81,
+      "acc": 0.9259259259259259,
+      "conf": 1.0,
+      "gap": 0.07407407407407407,
+      "ece": 0.07407407407407407,
+      "brier": 0.07407407407407407,
+      "auroc": 0.5,
+      "wrong": 6,
+      "confident_wrong": 6,
+      "conf_when_wrong": 1.0
+     },
+     "consistency": {
+      "n": 81,
+      "acc": 0.9259259259259259,
+      "conf": 1.0,
+      "gap": 0.07407407407407407,
+      "ece": 0.07407407407407407,
+      "brier": 0.07407407407407407,
+      "auroc": 0.5,
+      "wrong": 6,
+      "confident_wrong": 6,
+      "conf_when_wrong": 1.0
+     },
+     "ci": {
+      "acc": [
+       0.8641975308641975,
+       0.9753086419753086
+      ],
+      "conf": [
+       1.0,
+       1.0
+      ],
+      "ece": [
+       0.024691358024691357,
+       0.13580246913580252
+      ],
+      "auroc": [
+       0.5,
+       0.5
+      ]
+     },
+     "core_ci": {
+      "acc": [
+       0.8641975308641975,
+       0.9753086419753086
+      ],
+      "conf": [
+       1.0,
+       1.0
+      ],
+      "ece": [
+       0.024691358024691357,
+       0.13580246913580252
+      ],
+      "auroc": [
+       0.5,
+       0.5
+      ]
+     },
+     "by_domain": {
+      "컴퓨터": {
+       "n": 40,
+       "acc": 0.925,
+       "conf": 1.0,
+       "gap": 0.07499999999999996,
+       "ece": 0.07499999999999996,
+       "brier": 0.075,
+       "auroc": 0.5,
+       "wrong": 3,
+       "confident_wrong": 3,
+       "conf_when_wrong": 1.0
+      },
+      "수학": {
+       "n": 41,
+       "acc": 0.926829268292683,
+       "conf": 1.0,
+       "gap": 0.07317073170731703,
+       "ece": 0.07317073170731703,
+       "brier": 0.07317073170731707,
+       "auroc": 0.5,
+       "wrong": 3,
+       "confident_wrong": 3,
+       "conf_when_wrong": 1.0
+      }
+     },
+     "by_type": {
+      "코드추적": {
+       "n": 12,
+       "acc": 0.9166666666666666,
+       "conf": 1.0,
+       "gap": 0.08333333333333337,
+       "ece": 0.08333333333333337,
+       "brier": 0.08333333333333333,
+       "auroc": 0.5,
+       "wrong": 1,
+       "confident_wrong": 1,
+       "conf_when_wrong": 1.0
+      },
+      "전제오류": {
+       "n": 13,
+       "acc": 1.0,
+       "conf": 1.0,
+       "gap": 0.0,
+       "ece": 0.0,
+       "brier": 0.0,
+       "auroc": null,
+       "wrong": 0,
+       "confident_wrong": 0,
+       "conf_when_wrong": null
+      },
+      "개념": {
+       "n": 8,
+       "acc": 1.0,
+       "conf": 1.0,
+       "gap": 0.0,
+       "ece": 0.0,
+       "brier": 0.0,
+       "auroc": null,
+       "wrong": 0,
+       "confident_wrong": 0,
+       "conf_when_wrong": null
+      },
+      "계산": {
+       "n": 20,
+       "acc": 0.85,
+       "conf": 1.0,
+       "gap": 0.15000000000000002,
+       "ece": 0.15000000000000002,
+       "brier": 0.15,
+       "auroc": 0.5,
+       "wrong": 3,
+       "confident_wrong": 3,
+       "conf_when_wrong": 1.0
+      },
+      "함정": {
+       "n": 12,
+       "acc": 1.0,
+       "conf": 1.0,
+       "gap": 0.0,
+       "ece": 0.0,
+       "brier": 0.0,
+       "auroc": null,
+       "wrong": 0,
+       "confident_wrong": 0,
+       "conf_when_wrong": null
+      },
+      "알고리즘": {
+       "n": 8,
+       "acc": 0.875,
+       "conf": 1.0,
+       "gap": 0.125,
+       "ece": 0.125,
+       "brier": 0.125,
+       "auroc": 0.5,
+       "wrong": 1,
+       "confident_wrong": 1,
+       "conf_when_wrong": 1.0
+      },
+      "수표현": {
+       "n": 8,
+       "acc": 0.875,
+       "conf": 1.0,
+       "gap": 0.125,
+       "ece": 0.125,
+       "brier": 0.125,
+       "auroc": 0.5,
+       "wrong": 1,
+       "confident_wrong": 1,
+       "conf_when_wrong": 1.0
+      }
+     },
+     "reliability": [
+      {
+       "lo": 95,
+       "hi": 100,
+       "n": 81,
+       "conf": 1.0,
+       "acc": 0.9259259259259259
+      }
+     ],
+     "reliability_consistency": [
+      {
+       "lo": 95,
+       "hi": 100,
+       "n": 81,
+       "conf": 1.0,
+       "acc": 0.9259259259259259
+      }
+     ],
+     "conf_hist": {
+      "100": 81
+     }
     }
    },
    "reliability": [
@@ -14274,9 +14977,9 @@
     {
      "lo": 95,
      "hi": 100,
-     "n": 1010,
-     "conf": 0.9756039603960396,
-     "acc": 1.0
+     "n": 1091,
+     "conf": 0.9774152153987168,
+     "acc": 0.9945004582951421
     }
    ],
    "ladders": {
@@ -15625,6 +16328,18 @@
      "wrong": 0,
      "confident_wrong": 0,
      "conf_when_wrong": null
+    },
+    "Gemini Flash-Lite": {
+     "n": 81,
+     "acc": 0.9259259259259259,
+     "conf": 1.0,
+     "gap": 0.07407407407407407,
+     "ece": 0.07407407407407407,
+     "brier": 0.07407407407407407,
+     "auroc": 0.5,
+     "wrong": 6,
+     "confident_wrong": 6,
+     "conf_when_wrong": 1.0
     }
    },
    "items": [
@@ -15687,6 +16402,14 @@
         "rep": 3,
         "answer": "952",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "952",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -15759,6 +16482,14 @@
         "confidence": 98.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "4",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C02",
@@ -15827,6 +16558,14 @@
         "rep": 3,
         "answer": "-4 1",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "-4 1",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -15899,6 +16638,14 @@
         "confidence": 98.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "6",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C04",
@@ -15967,6 +16714,14 @@
         "rep": 3,
         "answer": "3",
         "confidence": 98.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "3",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -16039,6 +16794,14 @@
         "confidence": 98.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "177",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C06",
@@ -16107,6 +16870,14 @@
         "rep": 3,
         "answer": "db",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "db",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -16179,6 +16950,14 @@
         "confidence": 97.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "12",
+        "confidence": 100.0,
+        "correct": 0
+       }
       ]
      },
      "id": "C08",
@@ -16247,6 +17026,14 @@
         "rep": 3,
         "answer": "4",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "4",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -16319,6 +17106,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "1,10,3",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C10",
@@ -16387,6 +17182,14 @@
         "rep": 3,
         "answer": "false",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "false",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -16459,6 +17262,14 @@
         "confidence": 98.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "object number",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C12",
@@ -16527,6 +17338,14 @@
         "rep": 3,
         "answer": "4294967295",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "4294967295",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -16599,6 +17418,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "8",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C14",
@@ -16667,6 +17494,14 @@
         "rep": 3,
         "answer": "32570",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "32570",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -16739,6 +17574,14 @@
         "confidence": 96.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "-56",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C16",
@@ -16807,6 +17650,14 @@
         "rep": 3,
         "answer": "8",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "8",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -16879,6 +17730,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "3104",
+        "confidence": 100.0,
+        "correct": 0
+       }
       ]
      },
      "id": "C18",
@@ -16947,6 +17806,14 @@
         "rep": 3,
         "answer": "3",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "3",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -17019,6 +17886,14 @@
         "confidence": 97.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "30",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C20",
@@ -17087,6 +17962,14 @@
         "rep": 3,
         "answer": "20",
         "confidence": 98.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "20",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -17159,6 +18042,14 @@
         "confidence": 97.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "1, 3, 2, 5, 9, 8",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C22",
@@ -17227,6 +18118,14 @@
         "rep": 3,
         "answer": "2",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "2",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -17299,6 +18198,14 @@
         "confidence": 98.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "6",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C24",
@@ -17369,6 +18276,14 @@
         "confidence": 98.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "7",
+        "confidence": 100.0,
+        "correct": 0
+       }
       ]
      },
      "id": "C25",
@@ -17437,6 +18352,14 @@
         "rep": 3,
         "answer": "O(n^2)",
         "confidence": 98.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "O(n^2)",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -17509,6 +18432,14 @@
         "confidence": 98.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "132",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C27",
@@ -17577,6 +18508,14 @@
         "rep": 3,
         "answer": "7",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "7",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -17649,6 +18588,14 @@
         "confidence": 95.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C29",
@@ -17717,6 +18664,14 @@
         "rep": 3,
         "answer": "전제 오류",
         "confidence": 96.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -17789,6 +18744,14 @@
         "confidence": 95.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C31",
@@ -17857,6 +18820,14 @@
         "rep": 3,
         "answer": "전제 오류",
         "confidence": 95.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -17929,6 +18900,14 @@
         "confidence": 97.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C33",
@@ -17997,6 +18976,14 @@
         "rep": 3,
         "answer": "전제 오류",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -18069,6 +19056,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "4",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C35",
@@ -18137,6 +19132,14 @@
         "rep": 3,
         "answer": "2",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "2",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -18209,6 +19212,14 @@
         "confidence": 97.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "1000000",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C37",
@@ -18277,6 +19288,14 @@
         "rep": 3,
         "answer": "4",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "4",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -18349,6 +19368,14 @@
         "confidence": 96.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "4",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "C39",
@@ -18417,6 +19444,14 @@
         "rep": 3,
         "answer": "366",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "366",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -21289,6 +22324,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "100022",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M01",
@@ -21357,6 +22400,14 @@
         "rep": 3,
         "answer": "85",
         "confidence": 96.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "85",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -21429,6 +22480,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "29/21",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M03",
@@ -21497,6 +22556,14 @@
         "rep": 3,
         "answer": "2812160",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "2812160",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -21569,6 +22636,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "123",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M05",
@@ -21637,6 +22712,14 @@
         "rep": 3,
         "answer": "3/2",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "3/2",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -21709,6 +22792,14 @@
         "confidence": 88.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "108",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M07",
@@ -21777,6 +22868,14 @@
         "rep": 3,
         "answer": "7",
         "confidence": 98.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "7",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -21849,6 +22948,14 @@
         "confidence": 97.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "3361180491",
+        "confidence": 100.0,
+        "correct": 0
+       }
       ]
      },
      "id": "M09",
@@ -21919,6 +23026,14 @@
         "confidence": 97.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "81",
+        "confidence": 100.0,
+        "correct": 0
+       }
       ]
      },
      "id": "M10",
@@ -21987,6 +23102,14 @@
         "rep": 3,
         "answer": "4",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "4",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -22059,6 +23182,14 @@
         "confidence": 97.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "16",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M12",
@@ -22127,6 +23258,14 @@
         "rep": 3,
         "answer": "1806",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "1806",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -22199,6 +23338,14 @@
         "confidence": 96.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "13/32",
+        "confidence": 100.0,
+        "correct": 0
+       }
       ]
      },
      "id": "M14",
@@ -22267,6 +23414,14 @@
         "rep": 3,
         "answer": "200",
         "confidence": 98.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "200",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -22339,6 +23494,14 @@
         "confidence": 93.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "118",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M16",
@@ -22407,6 +23570,14 @@
         "rep": 3,
         "answer": "10946",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "10946",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -22479,6 +23650,14 @@
         "confidence": 95.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "8",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M18",
@@ -22547,6 +23726,14 @@
         "rep": 3,
         "answer": "1625625",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "1625625",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -22619,6 +23806,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "31",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M20",
@@ -22687,6 +23882,14 @@
         "rep": 3,
         "answer": "32",
         "confidence": 98.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "32",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -22759,6 +23962,14 @@
         "confidence": 97.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "0.65",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M22",
@@ -22827,6 +24038,14 @@
         "rep": 3,
         "answer": "36",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "36",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -22899,6 +24118,14 @@
         "confidence": 97.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "2",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M24",
@@ -22967,6 +24194,14 @@
         "rep": 3,
         "answer": "C",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "C",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -23039,6 +24274,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "127",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M26",
@@ -23107,6 +24350,14 @@
         "rep": 3,
         "answer": "3",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "3",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -23179,6 +24430,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "10",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M28",
@@ -23247,6 +24506,14 @@
         "rep": 3,
         "answer": "전제 오류",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -23319,6 +24586,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M30",
@@ -23387,6 +24662,14 @@
         "rep": 3,
         "answer": "전제 오류",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -23459,6 +24742,14 @@
         "confidence": 90.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M32",
@@ -23527,6 +24818,14 @@
         "rep": 3,
         "answer": "전제 오류",
         "confidence": 90.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -23599,6 +24898,14 @@
         "confidence": 97.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M34",
@@ -23667,6 +24974,14 @@
         "rep": 3,
         "answer": "전제 오류",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "전제 오류",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -23739,6 +25054,14 @@
         "confidence": 99.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "9.9",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M36",
@@ -23807,6 +25130,14 @@
         "rep": 3,
         "answer": "7",
         "confidence": 99.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "7",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -23879,6 +25210,14 @@
         "confidence": 98.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "11",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M38",
@@ -23947,6 +25286,14 @@
         "rep": 3,
         "answer": "130",
         "confidence": 97.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "130도",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -24019,6 +25366,14 @@
         "confidence": 97.0,
         "correct": 1
        }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "96%",
+        "confidence": 100.0,
+        "correct": 1
+       }
       ]
      },
      "id": "M40",
@@ -24087,6 +25442,14 @@
         "rep": 3,
         "answer": "120",
         "confidence": 98.0,
+        "correct": 1
+       }
+      ],
+      "Gemini Flash-Lite": [
+       {
+        "rep": 1,
+        "answer": "120",
+        "confidence": 100.0,
         "correct": 1
        }
       ]
@@ -25624,16 +26987,16 @@
    {
     "lo": 95,
     "hi": 100,
-    "n": 47,
+    "n": 96,
     "conf": 1.0,
-    "acc": 0.7872340425531915
+    "acc": 0.84375
    }
   ],
   "Gemini Flash": [
    {
     "lo": 95,
     "hi": 100,
-    "n": 36,
+    "n": 53,
     "conf": 1.0,
     "acc": 1.0
    }
@@ -25704,6 +27067,28 @@
     "lo": -0.03842925659472429,
     "hi": 0.30083645598897957,
     "p_improve": 0.7062374245472837
+   }
+  },
+  "Gemini Flash-Lite": {
+   "acc": {
+    "lo": 0.01347946586041826,
+    "hi": 0.12976096664039927,
+    "p_improve": 0.997
+   },
+   "ece": {
+    "lo": -0.12976096664039927,
+    "hi": -0.01347946586041826,
+    "p_improve": 0.997
+   },
+   "confident_wrong": {
+    "lo": -13,
+    "hi": -2,
+    "p_improve": 0.999
+   },
+   "auroc": {
+    "lo": 0.0,
+    "hi": 0.0,
+    "p_improve": 0.0
    }
   }
  }
