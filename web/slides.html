@@ -185,14 +185,15 @@
 </section>
 
 <!-- 10 개선 -->
-<section class="slide">
+<section class="slide" style="font-size:min(1.8vw, 3.2vh)">
   <p class="tag">개선</p>
   <h2>발견한 문제 → 고친 방법 → 다시 확인</h2>
   <div class="cols" style="align-items:start">
     <div>
-      <p><b>발견</b>: 쉬운 문제에서 한 번씩 실수하고도 확신도 98~99%<br><span class="small muted">Opus "1~200 중 3 또는 7의 배수 개수" → 86 (정답 85), 확신도 98<br>Haiku 행렬 거듭제곱 → 144 (정답 10946), 확신도 99</span></p>
+      <p><b>발견</b>: 쉬운 문제에서 한 번씩 실수하고도 확신도 98~99%<br><span class="small muted">예) Opus "1~200 중 3 또는 7의 배수 개수" → 86 (정답 85), 확신도 98</span></p>
       <p style="margin-top:.6em"><b>고친 방법 ① 점검 프롬프트</b><br><span class="small">전제 확인 → 다른 방법으로 검산 → 세기는 10개씩 묶어 세기 → 검산 결과로 확신도 정하기</span></p>
       <p style="margin-top:.6em"><b>고친 방법 ② 3번 물어보기</b><br><span class="small">같은 질문을 새 대화로 3번 → 답이 다르면 "검산 필요"</span></p>
+      <p class="small" style="margin-top:.6em;background:var(--soft);padding:.4em .6em;border-radius:.4em"><b>Gemini Flash-Lite</b>: 같은 프롬프트로 정답률은 <span id="glFix"></span>로 올랐지만 <b class="bad">확신도는 81문항 모두 여전히 100%</b> → 프롬프트로는 확신도를 못 고침</p>
     </div>
     <div id="fixTable"></div>
   </div>
@@ -324,14 +325,15 @@ function fill(S) {
   if (fix) {
     const cl = names.filter((n) => fix.models[n] && n.indexOf('Gemini') < 0);
     const row = (label, f, fmt, lowGood) => `<tr><td>${label}</td>${cl.map((n) => { const a = f(base.models[n]), b = f(fix.models[n]); const good = lowGood ? b < a : b > a;
-      return `<td>${fmt(a)} → <span class="${good ? 'good' : 'bad'}">${fmt(b)}</span></td>`; }).join('')}</tr>`;
+      return `<td>${fmt(a)} → <span class="${fmt(a) === fmt(b) ? '' : good ? 'good' : 'bad'}">${fmt(b)}</span></td>`; }).join('')}</tr>`;
     $('#fixTable').innerHTML = `<p class="small muted">점검 프롬프트 전 → 후 (Claude, 141문항 × 3번)</p><table><thead><tr><th></th>${cl.map((n) => `<th>${n.replace(' 5.5', '')}</th>`).join('')}</tr></thead><tbody>
       ${row('90%↑인데 틀림', (m) => m.stated.confident_wrong, (v) => v + '건', true)}
       ${row('정답률', (m) => m.stated.acc, (v) => pct(v, 1), false)}
       ${row('AUROC', (m) => m.stated.auroc, (v) => v.toFixed(2), false)}
       ${row('ECE', (m) => m.stated.ece, (v) => v.toFixed(3), true)}
-      </tbody></table><p class="small muted">AUROC↑ = 확신도로 오답을 더 잘 가려냄 · ECE는 확신도가 전반적으로 낮아져 조금 나빠짐</p><p class="small"><b>주의</b>: 처음부터 4건뿐이라 통계적으로 확정은 못 함 (95% 신뢰구간이 0 포함) → 방향은 좋지만 더 큰 실험 필요</p>`;
+      </tbody></table><p class="small muted">AUROC↑ 오답을 더 잘 가려냄 · ECE↑ 전반적으로 더 겸손해짐</p><p class="small" style="margin-top:.3em">⚠ 처음부터 4건뿐이라 아직 확정은 못 함 (95% 신뢰구간이 0 포함)</p>`;
   }
+  { const gb = base.core['Gemini Flash-Lite'], gf = fix?.core?.['Gemini Flash-Lite']; if (gb && gf) $('#glFix').textContent = `${pct(gb.acc)} → ${pct(gf.acc)}`; }
   // 3번 물어보기
   const flagged = [], items = base.items;
   let cw = 0, caught = 0, okFlag = 0, okTotal = 0;

@@ -206,6 +206,8 @@ function fill(S) {
     ${row('AUROC', (m) => m.stated.auroc, (v) => v.toFixed(3), false)}${row('ECE', (m) => m.stated.ece, (v) => v.toFixed(3), true)}${row('Brier', (m) => m.stated.brier, (v) => v.toFixed(3), true)}</tbody></table>`;
   $('#r4').innerHTML = `확신도 90% 이상 오답은 ${cwB}건에서 ${cwF}건으로 줄었고, 확신도로 오답을 가려내는 정도(AUROC)는 세 모델 모두 올랐다. 반면 평균 확신도가 낮아지면서 원래 약간 겸손하던 확신도가 더 겸손해져 ECE는 나빠졌다. 즉 점검 프롬프트는 <b>"확신도가 높은 답은 믿어도 된다"는 성질은 강화했지만, 확신도 숫자 자체를 정답률에 맞추지는 못했다</b>.
     <br><b>다만 이 개선이 우연이 아니라고 단정할 수는 없다.</b> 같은 문항 묶음으로 개선 전후를 함께 다시 뽑아(부트스트랩 1,000회) 차이의 95% 신뢰구간을 구하면, 90%↑ 오답 감소는 ${CLAUDE.map((n) => { const d = S.fix_vs_base?.[n]?.confident_wrong; return d ? `${n.replace(' 5.5', '')} ${d.lo}~${d.hi}건` : ''; }).join(', ')}으로 모두 0을 포함한다. 개선 전 오답 자체가 ${cwB}건뿐이었기 때문이다. 다시 뽑은 표본에서 개선된 비율은 ${CLAUDE.map((n) => { const d = S.fix_vs_base?.[n]; return d ? `${n.replace(' 5.5', '')} ${pct(d.confident_wrong.p_improve)}(90%↑ 오답), ${pct(d.auroc.p_improve)}(AUROC)` : ''; }).join(' · ')}였다. 방향은 일관되지만, 효과를 확정하려면 쉬운 문항의 실수를 더 많이 모을 수 있는 큰 문항 세트가 필요하다.`;
+  const gb = B.core['Gemini Flash-Lite'], gf = F.core?.['Gemini Flash-Lite'];
+  if (gb && gf) $('#r4').insertAdjacentHTML('beforeend', `<br><b>Gemini Flash-Lite에서는 다른 일이 일어났다.</b> 같은 점검 프롬프트로 기본 81문항의 정답률은 ${pct(gb.acc, 1)}에서 ${pct(gf.acc, 1)}로 올랐지만(오답 ${gb.wrong}건 → ${gf.wrong}건), 확신도는 개선 후에도 <b>81문항 모두 100%</b>였다. 검산은 시킬 수 있어도 확신도를 현실적으로 말하게 하지는 못한 것이다. 이런 모델에서는 확신도 숫자 대신 같은 질문을 여러 번 묻는 것 같은 바깥의 확인 방법이 필요하다.`);
   // 일관성
   let cw = 0, caught = 0, okF = 0, okT = 0;
   for (const it of B.items) for (const n of CLAUDE) { const rs = it.models[n]; if (!rs || rs.length < 3) continue; const a = rs.map((r) => String(r.answer).replace(/\s|,/g, '')); const un = a.every((x) => x === a[0]);
