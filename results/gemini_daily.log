@@ -1,3 +1,29 @@
 
 ===== 2026. 11. 26. 오후 7:07:09 제미나이 매일 실행 =====
 [base] 57 calls to run (83 already done)
+  제미나이 하루 한도: GenerateRequestsPerDayPerProjectPerModel-FreeTier
+  제미나이 하루 한도 도달: 여기서 멈춤 (내일 다시 실행하면 이어서 함)
+  제미나이 하루 한도: GenerateRequestsPerDayPerProjectPerModel-FreeTier
+  제미나이 하루 한도 도달: 여기서 멈춤 (내일 다시 실행하면 이어서 함)
+[base] finished: 0 calls, 0 unparsed
+[fix] 81 calls to run (0 already done)
+  제미나이 하루 한도: GenerateRequestsPerDayPerProjectPerModel-FreeTier
+  제미나이 하루 한도 도달: 여기서 멈춤 (내일 다시 실행하면 이어서 함)
+  제미나이 하루 한도: GenerateRequestsPerDayPerProjectPerModel-FreeTier
+  제미나이 하루 한도 도달: 여기서 멈춤 (내일 다시 실행하면 이어서 함)
+[fix] finished: 0 calls, 0 unparsed
+[base] 49 calls to run (83 already done)
+  20 done, 0 failed, 16.8/min, ~2 min left
+  40 done, 0 failed, 18.1/min, ~0 min left
+[base] finished: 49 calls, 0 unparsed
+[fix] 81 calls to run (0 already done)
+  20 done, 0 failed, 18.0/min, ~3 min left
+^C
+===== 2026. 11. 28. 오전 12:21:31 제미나이 매일 실행 =====
+[base] 57 calls to run (132 already done)
+
+===== 2026. 11. 28. 오후 7:09:02 제미나이 매일 실행 =====
+[base] 56 calls to run (133 already done)
+^C
+===== 2026. 11. 28. 오후 7:16:12 제미나이 매일 실행 =====
+[base] 56 calls to run (133 already done)
